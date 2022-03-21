@@ -1,10 +1,10 @@
-package data_access;
+package data_access.interfaces;
 
 import java.util.List;
 
 import model.Product;
 
-public interface ProductDao {
+public interface SupplierDao {
 	Product findById(int id);
 	List<Product> findAll();
 	int create(Product objectToInsert);
