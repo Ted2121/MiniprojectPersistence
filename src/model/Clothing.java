@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Clothing extends Product{
 	
 	private String size;
@@ -15,6 +17,20 @@ public class Clothing extends Product{
 	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
 			String size, String color) {
 		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock);
+		this.size = size;
+		this.color = color;
+	}
+	
+	public Clothing(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String size,
+			String color, ArrayList<SaleOrder> ordersFromProduct) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, ordersFromProduct);
+		this.size = size;
+		this.color = color;
+	}
+	
+	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String size,
+			String color, ArrayList<SaleOrder> ordersFromProduct) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, ordersFromProduct);
 		this.size = size;
 		this.color = color;
 	}

@@ -43,8 +43,6 @@ public class SaleOrder {
 
 
 
-
-
 	public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
 			Invoice invoice, ArrayList<Product> productsFromOrder) {
 		
@@ -74,6 +72,16 @@ public class SaleOrder {
 
 
 
+
+
+	public ArrayList<Product> getProductsFromOrder() {
+		return productsFromOrder;
+	}
+
+
+	public void setProductsFromOrder(ArrayList<Product> productsFromOrder) {
+		this.productsFromOrder = productsFromOrder;
+	}
 
 
 	public int getId() {
