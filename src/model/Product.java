@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public abstract class Product {
 	
 	private int id;
@@ -8,6 +10,7 @@ public abstract class Product {
 	private double salePrice;
 	private String countryOfOrigin;
 	private int minStock;
+	private ArrayList<SaleOrder> ordersFromProduct;
 	
 	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock) {
 		
@@ -26,6 +29,38 @@ public abstract class Product {
 		this.salePrice = salePrice;
 		this.countryOfOrigin = countryOfOrigin;
 		this.minStock = minStock;
+	}
+	
+	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
+			ArrayList<SaleOrder> orders) {
+		
+		this.id = id;
+		this.name = name;
+		this.purchasePrice = purchasePrice;
+		this.salePrice = salePrice;
+		this.countryOfOrigin = countryOfOrigin;
+		this.minStock = minStock;
+		this.ordersFromProduct = orders;
+	}
+	
+	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
+			ArrayList<SaleOrder> orders) {
+		super();
+		this.name = name;
+		this.purchasePrice = purchasePrice;
+		this.salePrice = salePrice;
+		this.countryOfOrigin = countryOfOrigin;
+		this.minStock = minStock;
+		this.ordersFromProduct = orders;
+	}
+	
+	
+	public ArrayList<SaleOrder> getOrdersFromProduct() {
+		return ordersFromProduct;
+	}
+
+	public void setOrdersFromProduct(ArrayList<SaleOrder> orders) {
+		this.ordersFromProduct = orders;
 	}
 
 	public int getId() {

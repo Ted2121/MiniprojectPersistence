@@ -1,7 +1,9 @@
 package model;
 
 public class Invoice {
-	private int invoiceNo;
-	
+	private int id;
+	private String invoiceNo;
+	private String paymentDate;
+	private double amount;
 
 }
