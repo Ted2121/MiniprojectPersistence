@@ -13,14 +13,14 @@ public class SaleOrder {
 	private Invoice invoice;
 	private ArrayList<Product> productsFromOrder;
 	
-	private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
 	
 	
 	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
 			Invoice invoice) {
 	
-		this.orderDate = LocalDateTime.now().format(getFormat());
-		this.deliveryDate = LocalDateTime.now().plusDays(14).format(getFormat());
+		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
@@ -34,8 +34,8 @@ public class SaleOrder {
 			Invoice invoice) {
 		
     	this.id = id;
-		this.orderDate = orderDate;
-		this.deliveryDate = deliveryDate;
+    	this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
@@ -47,31 +47,25 @@ public class SaleOrder {
 			Invoice invoice, ArrayList<Product> productsFromOrder) {
 		
 		this.id = id;
-		this.orderDate = orderDate;
-		this.deliveryDate = deliveryDate;
+		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
 		this.productsFromOrder = productsFromOrder;
 	}
-
-
-
 
 
 	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice,
 			ArrayList<Product> productsFromOrder) {
 		
-		this.orderDate = orderDate;
-		this.deliveryDate = deliveryDate;
+		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
 		this.productsFromOrder = productsFromOrder;
 	}
-
-
-
 
 
 	public ArrayList<Product> getProductsFromOrder() {
@@ -146,9 +140,6 @@ public class SaleOrder {
 	}
 
 
-	public static DateTimeFormatter getFormat() {
-        return format;
-    }
     
     
 }

@@ -1,5 +1,8 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.util.Random;
+
 public class Invoice {
 	private int id;
 	private String invoiceNo;
@@ -10,14 +13,14 @@ public class Invoice {
 		
 		this.id = id;
 		this.invoiceNo = invoiceNo;
-		this.paymentDate = paymentDate;
+		this.paymentDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.amount = amount;
 	}
 
 	public Invoice(String invoiceNo, String paymentDate, double amount) {
 		
 		this.invoiceNo = invoiceNo;
-		this.paymentDate = paymentDate;
+		this.paymentDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.amount = amount;
 	}
 
