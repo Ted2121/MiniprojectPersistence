@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Customer;
 
-public interface IF_CustomerDao {
+public interface CustomerDao {
 	Customer findById(int id);
 	List<Customer> findAll();
 	int create(Customer objectToInsert);

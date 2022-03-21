@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Product;
 
-public interface IF_ProductDao {
+public interface SupplierDao {
 	Product findById(int id);
 	List<Product> findAll();
 	int create(Product objectToInsert);

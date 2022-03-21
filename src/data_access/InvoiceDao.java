@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Invoice;
 
-public interface IF_InvoiceDao {
+public interface InvoiceDao {
 	Invoice findById(int id);
 	List<Invoice> findAll();
 	int create(Invoice objectToInsert);

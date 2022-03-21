@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Clothing;
 
-public interface IF_ClothingDao {
+public interface ClothingDao {
 	Clothing findById(int id);
 	List<Clothing> findAll();
 	int create(Clothing objectToInsert);

@@ -5,7 +5,7 @@ import java.util.List;
 import model.Customer;
 import model.SaleOrder;
 
-public interface IF_SaleOrderDao {
+public interface SaleOrderDao {
 	SaleOrder findById(int id);
 	List<SaleOrder> findAll();
 	List<SaleOrder> findByCustomer(Customer customer);

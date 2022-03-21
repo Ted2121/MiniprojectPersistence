@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Item;
 
-public interface IF_ItemDao {
+public interface ItemDao {
 	Item findById(int id);
 	List<Item> findAll();
 	List<Item> findByType(String type);
