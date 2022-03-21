@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class SaleOrder {
-	private static int id;
+	private int id;
 	private String orderDate;
 	private String deliveryDate;
 	private boolean deliveryStatus;
@@ -25,8 +25,21 @@ public class SaleOrder {
 		this.invoice = invoice;
 	}
 
+	
 
-    public String getOrderDate() {
+    public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public String getOrderDate() {
 		return orderDate;
 	}
 
