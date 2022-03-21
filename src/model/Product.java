@@ -32,7 +32,7 @@ public abstract class Product {
 	}
 	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			ArrayList<SaleOrder> orders) {
+			ArrayList<SaleOrder> ordersFromProduct) {
 		
 		this.id = id;
 		this.name = name;
@@ -40,18 +40,18 @@ public abstract class Product {
 		this.salePrice = salePrice;
 		this.countryOfOrigin = countryOfOrigin;
 		this.minStock = minStock;
-		this.ordersFromProduct = orders;
+		this.ordersFromProduct = ordersFromProduct;
 	}
 	
 	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			ArrayList<SaleOrder> orders) {
+			ArrayList<SaleOrder> ordersFromProduct) {
 		super();
 		this.name = name;
 		this.purchasePrice = purchasePrice;
 		this.salePrice = salePrice;
 		this.countryOfOrigin = countryOfOrigin;
 		this.minStock = minStock;
-		this.ordersFromProduct = orders;
+		this.ordersFromProduct = ordersFromProduct;
 	}
 	
 	

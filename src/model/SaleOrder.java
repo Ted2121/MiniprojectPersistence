@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class SaleOrder {
 	private int id;
@@ -10,9 +11,9 @@ public class SaleOrder {
 	private boolean deliveryStatus;
 	private Customer customer;
 	private Invoice invoice;
+	private ArrayList<Product> productsFromOrder;
 	
 	private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-	
 	
 	
 	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
@@ -24,10 +25,58 @@ public class SaleOrder {
 		this.customer = customer;
 		this.invoice = invoice;
 	}
+	
+	
 
 	
 
-    public int getId() {
+    public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
+			Invoice invoice) {
+		
+    	this.id = id;
+		this.orderDate = orderDate;
+		this.deliveryDate = deliveryDate;
+		this.deliveryStatus = deliveryStatus;
+		this.customer = customer;
+		this.invoice = invoice;
+	}
+
+
+
+
+
+	public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
+			Invoice invoice, ArrayList<Product> productsFromOrder) {
+		
+		this.id = id;
+		this.orderDate = orderDate;
+		this.deliveryDate = deliveryDate;
+		this.deliveryStatus = deliveryStatus;
+		this.customer = customer;
+		this.invoice = invoice;
+		this.productsFromOrder = productsFromOrder;
+	}
+
+
+
+
+
+	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice,
+			ArrayList<Product> productsFromOrder) {
+		
+		this.orderDate = orderDate;
+		this.deliveryDate = deliveryDate;
+		this.deliveryStatus = deliveryStatus;
+		this.customer = customer;
+		this.invoice = invoice;
+		this.productsFromOrder = productsFromOrder;
+	}
+
+
+
+
+
+	public int getId() {
 		return id;
 	}
 
