@@ -5,12 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class SaleOrder {
+	
 	private int id;
 	private String orderDate;
 	private String deliveryDate;
 	private boolean deliveryStatus;
 	private Customer customer;
 	private Invoice invoice;
+	private int amount;
 	private ArrayList<Product> productsFromOrder;
 	
 
