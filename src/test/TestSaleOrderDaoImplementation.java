@@ -47,7 +47,7 @@ public class TestSaleOrderDaoImplementation {
 	}
 	
 	@Test
-	public void TestSaleOrderFindByType() throws SQLException {
+	public void TestSaleOrderFindByCustomer() throws SQLException {
 		List<SaleOrder> result = SaleOrderDao.findByCustomer(customer);
 		assertFalse("The retrieved list shouldn't be empty", result.isEmpty());
 	}

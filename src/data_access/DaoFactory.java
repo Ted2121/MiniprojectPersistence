@@ -55,7 +55,7 @@ public class DaoFactory {
 		return saleOrderDao;
 	}
 	
-	public static SupplierDaoImplementation getSupplierOrderDao() {
+	public static SupplierDaoImplementation getSupplierDao() {
 		if(supplierDao == null) {
 			supplierDao = new SupplierDaoImplementation();
 		}
