@@ -27,8 +27,8 @@ public class TestClothingDaoImplementation {
 	
 	@BeforeClass
 	public static void CreatingTheTuppleToDelete () throws SQLException {
-		objectToDelete = new Clothing("testClothing",10.02,12.56,"Poland",10,"M","red"); 
-		objectToUpdate = new Clothing("testClothing",10.02,12.56,"Poland",10,"M","red"); 
+		objectToDelete = new Clothing("testClothing",10.02,12.56,"Poland",10, 12,"M","red"); 
+		objectToUpdate = new Clothing("testClothing",10.02,12.56,"Poland",10, 12,"M","red"); 
 		clothingDao.create(objectToDelete);
 		clothingDao.create(objectToUpdate);
 	}
@@ -48,7 +48,7 @@ public class TestClothingDaoImplementation {
 	
 	@Test
 	public void TestClothingInsert() throws SQLException {
-		Clothing testClothing = new Clothing("testClothing",10.02,12.56,"Poland",10,"M","red"); 
+		Clothing testClothing = new Clothing("testClothing",10.02,12.56,"Poland",10, 12,"M","red"); 
 		generatedIdCreateTest = clothingDao.create(testClothing);
 		assertNotNull("The retrieved object shouldn't be null", clothingDao.findById(generatedIdCreateTest));
 	}
