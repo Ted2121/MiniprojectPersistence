@@ -2,7 +2,7 @@ package model;
 
 public class Customer {
 	
-	private static int id;
+	private int id;
 	private String name;
 	private String address;
 	private String city;
@@ -11,7 +11,7 @@ public class Customer {
 	private String type;
 	
 	public Customer(String name, String address, String city, int zipcode, String phoneNo, String type) {
-		super();
+		
 		this.name = name;
 		this.address = address;
 		this.city = city;
@@ -20,6 +20,29 @@ public class Customer {
 		this.type = type;
 	}
 	
+	
+	
+	public Customer(int id, String name, String address, String city, int zipcode, String phoneNo, String type) {
+		
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.city = city;
+		this.zipcode = zipcode;
+		this.phoneNo = phoneNo;
+		this.type = type;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

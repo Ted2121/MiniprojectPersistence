@@ -2,31 +2,95 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class SaleOrder {
-	private static int id;
+	private int id;
 	private String orderDate;
 	private String deliveryDate;
 	private boolean deliveryStatus;
 	private Customer customer;
 	private Invoice invoice;
+	private ArrayList<Product> productsFromOrder;
 	
-	private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-	
+
 	
 	
 	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
 			Invoice invoice) {
 	
-		this.orderDate = LocalDateTime.now().format(getFormat());
-		this.deliveryDate = LocalDateTime.now().plusDays(14).format(getFormat());
+		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
+		this.deliveryStatus = deliveryStatus;
+		this.customer = customer;
+		this.invoice = invoice;
+	}
+	
+	
+
+	
+
+    public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
+			Invoice invoice) {
+		
+    	this.id = id;
+    	this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
 	}
 
 
-    public String getOrderDate() {
+
+	public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
+			Invoice invoice, ArrayList<Product> productsFromOrder) {
+		
+		this.id = id;
+		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
+		this.deliveryStatus = deliveryStatus;
+		this.customer = customer;
+		this.invoice = invoice;
+		this.productsFromOrder = productsFromOrder;
+	}
+
+
+	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice,
+			ArrayList<Product> productsFromOrder) {
+		
+		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
+		this.deliveryStatus = deliveryStatus;
+		this.customer = customer;
+		this.invoice = invoice;
+		this.productsFromOrder = productsFromOrder;
+	}
+
+
+	public ArrayList<Product> getProductsFromOrder() {
+		return productsFromOrder;
+	}
+
+
+	public void setProductsFromOrder(ArrayList<Product> productsFromOrder) {
+		this.productsFromOrder = productsFromOrder;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public String getOrderDate() {
 		return orderDate;
 	}
 
@@ -76,9 +140,6 @@ public class SaleOrder {
 	}
 
 
-	public static DateTimeFormatter getFormat() {
-        return format;
-    }
     
     
 }
