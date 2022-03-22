@@ -62,6 +62,14 @@ public abstract class Product {
 	
 	
 	
+	public SaleOrder_Product getSaleOrderProductPair() {
+		return saleOrderProductPair;
+	}
+
+	public void setSaleOrderProductPair(SaleOrder_Product saleOrderProductPair) {
+		this.saleOrderProductPair = saleOrderProductPair;
+	}
+
 	public Supplier getSupplier() {
 		return supplier;
 	}
