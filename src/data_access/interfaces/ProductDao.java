@@ -1,13 +1,12 @@
 package data_access.interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import model.Product;
 
 public interface ProductDao {
-	Product findById(int id);
-	List<Product> findAll();
-	int create(Product objectToInsert);
-	void update(Product objectToUpdate);
-	void delete(Product objectToDelete);
+	int create(Product objectToInsert) throws SQLException;
+	void update(Product objectToUpdate) throws SQLException;
+	void delete(Product objectToDelete) throws SQLException;
 }

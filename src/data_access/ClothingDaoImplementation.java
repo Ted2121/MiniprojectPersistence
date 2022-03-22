@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data_access.interfaces.ClothingDao;
+import data_access.interfaces.ProductDaoImplementation;
 import model.Clothing;
 
 public class ClothingDaoImplementation implements ClothingDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
+	ProductDaoImplementation productDao = new ProductDaoImplementation();
 	
 	private List<Clothing> buildObjects(ResultSet rs) throws SQLException{
 		List<Clothing> clothingList = new ArrayList<Clothing>();
@@ -56,23 +58,8 @@ public class ClothingDaoImplementation implements ClothingDao{
 
 	@Override
 	public int create(Clothing objectToInsert) throws SQLException {
-		String sqlInsertProductStatement = "INSERT INTO Product([name], purchasePrice, salesPrice, countryOfOrigin, minStock, stock, FK_Supplier)"
-				+ "VALUES(? , ? , ? , ? , ? , ? , ?);";
-		PreparedStatement preparedInsertProductStatementWithGeneratedKey = connectionDB.prepareStatement(sqlInsertProductStatement, Statement.RETURN_GENERATED_KEYS);
-		preparedInsertProductStatementWithGeneratedKey.setString(1, objectToInsert.getName());
-		preparedInsertProductStatementWithGeneratedKey.setDouble(2, objectToInsert.getPurchasePrice());
-		preparedInsertProductStatementWithGeneratedKey.setDouble(3, objectToInsert.getSalePrice());
-		preparedInsertProductStatementWithGeneratedKey.setString(4, objectToInsert.getCountryOfOrigin());
-		preparedInsertProductStatementWithGeneratedKey.setInt(5, objectToInsert.getMinStock());
-		preparedInsertProductStatementWithGeneratedKey.setInt(6, 0); //Hardcoded value TODO use product.stock
-		preparedInsertProductStatementWithGeneratedKey.setInt(7, 1); //Hardcoded value TODO change it to the supplier id
 		
-		preparedInsertProductStatementWithGeneratedKey.executeUpdate();
-		ResultSet tableContainingGenratedIds = preparedInsertProductStatementWithGeneratedKey.getGeneratedKeys();
-		int generatedId = 0;
-		while(tableContainingGenratedIds.next()) {
-			generatedId = tableContainingGenratedIds.getInt(1);
-		}
+		int generatedId = productDao.create(objectToInsert);
 		
 		String sqlInsertClothingStatement = "INSERT INTO Clothing(size, color, id)"
 				+ "VALUES(?, ?, ?);";
@@ -90,18 +77,7 @@ public class ClothingDaoImplementation implements ClothingDao{
 
 	@Override
 	public boolean update(Clothing objectToUpdate) throws SQLException {
-		String sqlUpdateProductStatement = "UPDATE Product SET [name] = ?, purchasePrice = ?, salesPrice = ?, countryOfOrigin = ?, minStock = ?, stock = ?, FK_Supplier = ? WHERE id = ?";
-		PreparedStatement preparedUpdateProductStatement = connectionDB.prepareStatement(sqlUpdateProductStatement);
-		preparedUpdateProductStatement.setString(1, objectToUpdate.getName());
-		preparedUpdateProductStatement.setDouble(2, objectToUpdate.getPurchasePrice());
-		preparedUpdateProductStatement.setDouble(3, objectToUpdate.getSalePrice());
-		preparedUpdateProductStatement.setString(4, objectToUpdate.getCountryOfOrigin());
-		preparedUpdateProductStatement.setInt(5, objectToUpdate.getMinStock());
-		preparedUpdateProductStatement.setInt(6, 0); //Hardcoded value TODO use product.stock
-		preparedUpdateProductStatement.setInt(7, 1); //Hardcoded value TODO change it to the supplier id
-		preparedUpdateProductStatement.setInt(8, objectToUpdate.getId());
-		
-		preparedUpdateProductStatement.execute();
+		productDao.update(objectToUpdate);
 		
 		String sqlUpdateClothingStatement = "UPDATE Clothing SET [size] = ?, color = ? WHERE id = ?";
 		PreparedStatement preparedUpdateClothingStatement = connectionDB.prepareStatement(sqlUpdateClothingStatement);
@@ -116,11 +92,7 @@ public class ClothingDaoImplementation implements ClothingDao{
 
 	@Override
 	public boolean delete(Clothing objectToDelete) throws SQLException {
-
-		String sqlDeleteClothingStatement = "DELETE FROM Clothing WHERE id = ?";
-		PreparedStatement preparedDeleteClothingStatement = connectionDB.prepareStatement(sqlDeleteClothingStatement);
-		preparedDeleteClothingStatement.setInt(1, objectToDelete.getId());
-		preparedDeleteClothingStatement.execute();
+		productDao.delete(objectToDelete);
 
 		String sqlDeleteProductStatement = "DELETE FROM Product WHERE id = ?";
 		PreparedStatement preparedDeleteProductStatement = connectionDB.prepareStatement(sqlDeleteProductStatement);
