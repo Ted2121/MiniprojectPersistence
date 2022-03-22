@@ -1,4 +1,4 @@
-package data_access.interfaces;
+package data_access;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import data_access.DatabaseConnection;
+import data_access.interfaces.ProductDao;
 import model.Product;
 
 public class ProductDaoImplementation implements ProductDao {

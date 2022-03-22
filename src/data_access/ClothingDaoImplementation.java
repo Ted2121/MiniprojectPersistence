@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data_access.interfaces.ClothingDao;
-import data_access.interfaces.ProductDaoImplementation;
 import model.Clothing;
 
 public class ClothingDaoImplementation implements ClothingDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
-	ProductDaoImplementation productDao = new ProductDaoImplementation();
+	ProductDaoImplementation productDao = DaoFactory.getProductDao();
 	
 	private List<Clothing> buildObjects(ResultSet rs) throws SQLException{
 		List<Clothing> clothingList = new ArrayList<Clothing>();

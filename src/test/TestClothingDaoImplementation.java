@@ -14,12 +14,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import data_access.ClothingDaoImplementation;
+import data_access.DaoFactory;
 import data_access.DatabaseConnection;
 import model.Clothing;
 
 public class TestClothingDaoImplementation {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
-	static ClothingDaoImplementation clothingDao = new ClothingDaoImplementation();
+	static ClothingDaoImplementation clothingDao = DaoFactory.getClothingDao();
 	static int generatedIdCreateTest;
 	static Clothing objectToDelete;
 	static Clothing objectToUpdate;
