@@ -11,9 +11,13 @@ public abstract class Product {
 	private String countryOfOrigin;
 	private int minStock;
 	private ArrayList<SaleOrder> ordersFromProduct;
+	private Supplier supplier;
+	private int stock;
 	
-	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock) {
+	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier) {
 		
+		this.supplier = supplier;
+		this.stock = stock;
 		this.name = name;
 		this.purchasePrice = purchasePrice;
 		this.salePrice = salePrice;
@@ -21,7 +25,7 @@ public abstract class Product {
 		this.minStock = minStock;
 	}
 
-	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock) {
+	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier) {
 		
 		this.id = id;
 		this.name = name;
@@ -31,7 +35,7 @@ public abstract class Product {
 		this.minStock = minStock;
 	}
 	
-	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
+	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier,
 			ArrayList<SaleOrder> ordersFromProduct) {
 		
 		this.id = id;
@@ -43,7 +47,7 @@ public abstract class Product {
 		this.ordersFromProduct = ordersFromProduct;
 	}
 	
-	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
+	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier,
 			ArrayList<SaleOrder> ordersFromProduct) {
 		super();
 		this.name = name;
@@ -55,6 +59,23 @@ public abstract class Product {
 	}
 	
 	
+	
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
 	public ArrayList<SaleOrder> getOrdersFromProduct() {
 		return ordersFromProduct;
 	}
