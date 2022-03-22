@@ -46,7 +46,7 @@ public class SaleOrder {
 
 
 	public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
-			Invoice invoice, ArrayList<Product> productsFromOrder) {
+			Invoice invoice, SaleOrder_Product saleOrderProductPair) {
 		
 		this.id = id;
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
@@ -54,31 +54,39 @@ public class SaleOrder {
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
-		this.productsFromOrder = productsFromOrder;
+		this.saleOrderProductPair = saleOrderProductPair;
 	}
 
 
-	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice,
-			ArrayList<Product> productsFromOrder) {
+	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice, SaleOrder_Product saleOrderProductPair) {
 		
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
-		this.productsFromOrder = productsFromOrder;
+		this.saleOrderProductPair = saleOrderProductPair;
+	}
+
+	
+	
+	public int getAmount() {
+		return amount;
 	}
 
 
-	public ArrayList<Product> getProductsFromOrder() {
-		return productsFromOrder;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 
-	public void setProductsFromOrder(ArrayList<Product> productsFromOrder) {
-		this.productsFromOrder = productsFromOrder;
+	public SaleOrder_Product getSaleOrderProductPair() {
+		return saleOrderProductPair;
 	}
 
+	public void setSaleOrderProductPair(SaleOrder_Product saleOrderProductPair) {
+		this.saleOrderProductPair = saleOrderProductPair;
+	}
 
 	public int getId() {
 		return id;
