@@ -14,9 +14,9 @@ public abstract class Product {
 	private Supplier supplier;
 	private int stock;
 	
-	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier) {
+	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock) {
 		
-		this.supplier = supplier;
+	
 		this.stock = stock;
 		this.name = name;
 		this.purchasePrice = purchasePrice;
@@ -25,7 +25,7 @@ public abstract class Product {
 		this.minStock = minStock;
 	}
 
-	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier,
+	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
 			SaleOrder_Product saleOrderProductPair) {
 		
 		this.name = name;
@@ -36,7 +36,7 @@ public abstract class Product {
 		this.saleOrderProductPair = saleOrderProductPair;
 	}
 	
-	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier) {
+	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock) {
 		
 		this.id = id;
 		this.name = name;
@@ -47,7 +47,7 @@ public abstract class Product {
 	}
 	
 	
-	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier,
+	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
 			SaleOrder_Product saleOrderProductPair) {
 		
 		this.id = id;
