@@ -42,6 +42,14 @@ public class SaleOrder {
 		this.customer = customer;
 		this.invoice = invoice;
 	}
+    
+    public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus) {
+		
+    	this.id = id;
+    	this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
+		this.deliveryStatus = deliveryStatus;
+	}
 
 
 

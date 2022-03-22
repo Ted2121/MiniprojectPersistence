@@ -43,7 +43,7 @@ public class ProductDaoImplementation implements ProductDao {
 		preparedUpdateProductStatement.setDouble(3, objectToUpdate.getSalePrice());
 		preparedUpdateProductStatement.setString(4, objectToUpdate.getCountryOfOrigin());
 		preparedUpdateProductStatement.setInt(5, objectToUpdate.getMinStock());
-		preparedUpdateProductStatement.setInt(6, 0); //Hardcoded value TODO use product.stock
+		preparedUpdateProductStatement.setInt(6, objectToUpdate.getStock());
 		preparedUpdateProductStatement.setInt(7, 1); //Hardcoded value TODO change it to the supplier id
 		preparedUpdateProductStatement.setInt(8, objectToUpdate.getId());
 		

@@ -27,7 +27,7 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 	}
 	
 	private Invoice buildObject(ResultSet rs) throws SQLException{
-		Invoice buildedObject = new Invoice(rs.getInt("id"),rs.getString("Invoiceno"), rs.getString("paymentDate") , rs.getDouble("amount"));
+		Invoice buildedObject = new Invoice(rs.getInt("id"),rs.getString("invoiceno"), rs.getString("paymentDate") , rs.getDouble("amount"));
 		return buildedObject;
 	}
 
@@ -57,7 +57,7 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 
 	@Override
 	public int create(Invoice objectToInsert) throws SQLException {
-		String sqlInsertInvoiceStatement = "INSERT INTO Invoice(Invoiceno, paymentDate, amount) VALUES(?, ?, ?);";
+		String sqlInsertInvoiceStatement = "INSERT INTO Invoice(invoiceno, paymentDate, amount) VALUES(?, ?, ?);";
 		PreparedStatement preparedInsertInvoiceStatementWithGeneratedKey = connectionDB.prepareStatement(sqlInsertInvoiceStatement, Statement.RETURN_GENERATED_KEYS);
 		preparedInsertInvoiceStatementWithGeneratedKey.setString(1, objectToInsert.getInvoiceNo());
 		preparedInsertInvoiceStatementWithGeneratedKey.setString(2, objectToInsert.getPaymentDate() );
@@ -76,7 +76,7 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 
 	@Override
 	public boolean update(Invoice objectToUpdate) throws SQLException {
-		String sqlUpdateInvoiceStatement = "UPDATE Invoice SET Invoiceno = ?, paymentDate = ?, amount= ? WHERE id = ?";
+		String sqlUpdateInvoiceStatement = "UPDATE Invoice SET invoiceno = ?, paymentDate = ?, amount= ? WHERE id = ?";
 		PreparedStatement preparedUpdateInvoiceStatement = connectionDB.prepareStatement(sqlUpdateInvoiceStatement);
 		preparedUpdateInvoiceStatement.setString(1, objectToUpdate.getInvoiceNo());
 		preparedUpdateInvoiceStatement.setString(2, objectToUpdate.getPaymentDate());
