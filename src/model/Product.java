@@ -10,7 +10,7 @@ public abstract class Product {
 	private double salePrice;
 	private String countryOfOrigin;
 	private int minStock;
-	private ArrayList<SaleOrder> ordersFromProduct;
+	private SaleOrder_Product saleOrderProductPair;
 	private Supplier supplier;
 	private int stock;
 	
@@ -25,6 +25,17 @@ public abstract class Product {
 		this.minStock = minStock;
 	}
 
+	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier,
+			SaleOrder_Product saleOrderProductPair) {
+		
+		this.name = name;
+		this.purchasePrice = purchasePrice;
+		this.salePrice = salePrice;
+		this.countryOfOrigin = countryOfOrigin;
+		this.minStock = minStock;
+		this.saleOrderProductPair = saleOrderProductPair;
+	}
+	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier) {
 		
 		this.id = id;
@@ -35,8 +46,9 @@ public abstract class Product {
 		this.minStock = minStock;
 	}
 	
+	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier,
-			ArrayList<SaleOrder> ordersFromProduct) {
+			SaleOrder_Product saleOrderProductPair) {
 		
 		this.id = id;
 		this.name = name;
@@ -44,19 +56,9 @@ public abstract class Product {
 		this.salePrice = salePrice;
 		this.countryOfOrigin = countryOfOrigin;
 		this.minStock = minStock;
-		this.ordersFromProduct = ordersFromProduct;
+		this.saleOrderProductPair = saleOrderProductPair;
 	}
 	
-	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, Supplier supplier,
-			ArrayList<SaleOrder> ordersFromProduct) {
-		super();
-		this.name = name;
-		this.purchasePrice = purchasePrice;
-		this.salePrice = salePrice;
-		this.countryOfOrigin = countryOfOrigin;
-		this.minStock = minStock;
-		this.ordersFromProduct = ordersFromProduct;
-	}
 	
 	
 	
@@ -76,13 +78,7 @@ public abstract class Product {
 		this.stock = stock;
 	}
 
-	public ArrayList<SaleOrder> getOrdersFromProduct() {
-		return ordersFromProduct;
-	}
 
-	public void setOrdersFromProduct(ArrayList<SaleOrder> orders) {
-		this.ordersFromProduct = orders;
-	}
 
 	public int getId() {
 		return id;

@@ -7,30 +7,32 @@ public class Clothing extends Product{
 	private String size;
 	private String color;
 	
+
+
 	public Clothing(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			String size, String color) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock);
+			int stock, Supplier supplier, String size, String color) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier);
 		this.size = size;
 		this.color = color;
 	}
 	
 	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			String size, String color) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock);
+			int stock, Supplier supplier, String size, String color) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier);
 		this.size = size;
 		this.color = color;
 	}
 	
-	public Clothing(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String size,
-			String color, ArrayList<SaleOrder> ordersFromProduct) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, ordersFromProduct);
+	public Clothing(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
+			int stock, Supplier supplier, String size, String color, SaleOrder_Product saleOrderProductPair) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier, saleOrderProductPair);
 		this.size = size;
 		this.color = color;
 	}
 	
-	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String size,
-			String color, ArrayList<SaleOrder> ordersFromProduct) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, ordersFromProduct);
+	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
+			int stock, Supplier supplier, String size, String color, SaleOrder_Product saleOrderProductPair) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier, saleOrderProductPair);
 		this.size = size;
 		this.color = color;
 	}

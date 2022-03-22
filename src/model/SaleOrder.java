@@ -13,7 +13,7 @@ public class SaleOrder {
 	private Customer customer;
 	private Invoice invoice;
 	private int amount;
-	private ArrayList<Product> productsFromOrder;
+	private SaleOrder_Product saleOrderProductPair;
 	
 
 	

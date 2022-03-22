@@ -6,32 +6,34 @@ public class Item extends Product{
 	private String type;
 	private String description;
 	
-	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String type,
-			String description) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock);
-		this.type = type;
-		this.description = description;
-	}
-	
-	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String type,
-			String description) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock);
-		this.type = type;
-		this.description = description;
-	}
-	
+
 	
 
-	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String type,
-			String description, ArrayList<SaleOrder> ordersFromProduct) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, ordersFromProduct);
+
+	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
+			Supplier supplier, String type, String description) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier);
 		this.type = type;
 		this.description = description;
 	}
 	
-	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, String type,
-			String description, ArrayList<SaleOrder> ordersFromProduct) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, ordersFromProduct);
+	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
+			Supplier supplier, String type, String description) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier);
+		this.type = type;
+		this.description = description;
+	}
+	
+	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
+			Supplier supplier, String type, String description, SaleOrder_Product saleOrderProductPair) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier, saleOrderProductPair);
+		this.type = type;
+		this.description = description;
+	}
+	
+	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
+			Supplier supplier, String type, String description, SaleOrder_Product saleOrderProductPair) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, supplier, saleOrderProductPair);
 		this.type = type;
 		this.description = description;
 	}
