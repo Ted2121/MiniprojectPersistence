@@ -98,4 +98,10 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 		return true;
 	}
 
+	@Override
+	public void setSalesOrderRelatedToThisInvoice(Invoice invoice) throws SQLException {
+		invoice.setSaleOrder(DaoFactory.getSaleOrderDao().findByInvoice(invoice));
+		
+	}
+
 }

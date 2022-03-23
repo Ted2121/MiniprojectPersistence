@@ -12,4 +12,5 @@ public interface InvoiceDao {
 	int create(Invoice objectToInsert) throws SQLException, ParseException;
 	boolean update(Invoice objectToUpdate) throws SQLException;
 	boolean delete(Invoice objectToDelete) throws SQLException;
+	void setSalesOrderRelatedToThisInvoice(Invoice invoice) throws SQLException;
 }
