@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 
 public class Item extends Product{
 	private String type;
@@ -20,13 +21,14 @@ public class Item extends Product{
 	}
 	
 	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-		 String type, String description, SaleOrder_Product saleOrderProductPair) {
+		 String type, String description, List<SaleOrder_Product> saleOrderProductPair) {
 		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
 		this.type = type;
 		this.description = description;
 	}
 	
-	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, String type, String description, SaleOrder_Product saleOrderProductPair) {
+	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, String type, 
+			String description, List<SaleOrder_Product> saleOrderProductPair) {
 		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
 		this.type = type;
 		this.description = description;
