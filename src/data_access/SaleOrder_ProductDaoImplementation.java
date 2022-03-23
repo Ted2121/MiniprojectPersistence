@@ -66,9 +66,7 @@ public class SaleOrder_ProductDaoImplementation implements SaleOrder_ProductDao{
 		preparedSelectStatement.setLong(1, product.getId());
 		ResultSet rs = preparedSelectStatement.executeQuery();
 		List<SaleOrder_Product> retrievedSaleOrder_Product = null;
-		while(rs.next()) {
-			retrievedSaleOrder_Product = buildObjects(rs);
-		}
+		retrievedSaleOrder_Product = buildObjects(rs);
 		
 		return retrievedSaleOrder_Product;
 	}
