@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Customer;
-import model.Item;
 
 public interface CustomerDao {
 	Customer findById(int id) throws SQLException;

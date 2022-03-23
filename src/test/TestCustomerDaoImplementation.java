@@ -17,7 +17,6 @@ import data_access.CustomerDaoImplementation;
 import data_access.DaoFactory;
 import data_access.DatabaseConnection;
 import model.Customer;
-import model.SaleOrder;
 
 public class TestCustomerDaoImplementation {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();

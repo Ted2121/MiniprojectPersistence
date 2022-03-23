@@ -21,14 +21,14 @@ public class Item extends Product{
 	}
 	
 	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-		 String type, String description, List<SaleOrder_Product> saleOrderProductPair) {
+		 String type, String description, List<LineItem> saleOrderProductPair) {
 		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
 		this.type = type;
 		this.description = description;
 	}
 	
 	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, String type, 
-			String description, List<SaleOrder_Product> saleOrderProductPair) {
+			String description, List<LineItem> saleOrderProductPair) {
 		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
 		this.type = type;
 		this.description = description;

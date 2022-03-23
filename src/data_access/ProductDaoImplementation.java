@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import data_access.interfaces.ProductDao;
-import model.Item;
 import model.Product;
-import model.SaleOrder;
 
 public class ProductDaoImplementation implements ProductDao {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -68,8 +66,8 @@ public class ProductDaoImplementation implements ProductDao {
 	}
 
 	@Override
-	public void setSaleOrder_ProductRelatedToThisProduct(Product product) throws SQLException {
-		product.setSaleOrderProductPair(DaoFactory.getSaleOrder_ProductDao().findByProduct(product));
+	public void setLineItemRelatedToThisProduct(Product product) throws SQLException {
+		product.setLineItem(DaoFactory.getLineItemDao().findByProduct(product));
 	}
 
 }

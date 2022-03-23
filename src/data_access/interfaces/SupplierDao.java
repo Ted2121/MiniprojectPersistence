@@ -3,7 +3,6 @@ package data_access.interfaces;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Product;
 import model.Supplier;
 
 public interface SupplierDao {

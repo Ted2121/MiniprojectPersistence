@@ -1,8 +1,6 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SaleOrder {
@@ -14,7 +12,7 @@ public class SaleOrder {
 	private Customer customer;
 	private Invoice invoice;
 	private double amount;
-	private List<SaleOrder_Product> saleOrderProductPair;
+	private List<LineItem> lineItem;
 	private int FK_Invoice;
 	private int FK_Customer;
 	
@@ -65,7 +63,7 @@ public class SaleOrder {
 
 
 	public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
-			Invoice invoice, List<SaleOrder_Product> saleOrderProductPair) {
+			Invoice invoice, List<LineItem> lineItem) {
 		
 		this.id = id;
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
@@ -73,18 +71,18 @@ public class SaleOrder {
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
-		this.saleOrderProductPair = saleOrderProductPair;
+		this.lineItem = lineItem;
 	}
 
 
-	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice, List<SaleOrder_Product> saleOrderProductPair) {
+	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice, List<LineItem> lineItem) {
 		
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
-		this.saleOrderProductPair = saleOrderProductPair;
+		this.lineItem = lineItem;
 	}
 
 	
@@ -99,12 +97,12 @@ public class SaleOrder {
 	}
 
 
-	public List<SaleOrder_Product> getSaleOrderProductPair() {
-		return saleOrderProductPair;
+	public List<LineItem> getLineItem() {
+		return lineItem;
 	}
 
-	public void setSaleOrderProductPair(List<SaleOrder_Product> saleOrderProductPair) {
-		this.saleOrderProductPair = saleOrderProductPair;
+	public void setLineItem(List<LineItem> lineItem) {
+		this.lineItem = lineItem;
 	}
 
 	public int getId() {

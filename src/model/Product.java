@@ -10,7 +10,7 @@ public abstract class Product {
 	private double salePrice;
 	private String countryOfOrigin;
 	private int minStock;
-	private List<SaleOrder_Product> saleOrderProductPair;
+	private List<LineItem> lineItem;
 	private Supplier supplier;
 	private int FK_Supplier;
 	private int stock;
@@ -27,14 +27,14 @@ public abstract class Product {
 	}
 
 	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			List<SaleOrder_Product> saleOrderProductPair) {
+			List<LineItem> lineItem) {
 		
 		this.name = name;
 		this.purchasePrice = purchasePrice;
 		this.salePrice = salePrice;
 		this.countryOfOrigin = countryOfOrigin;
 		this.minStock = minStock;
-		this.saleOrderProductPair = saleOrderProductPair;
+		this.lineItem = lineItem;
 	}
 	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock) {
@@ -49,7 +49,7 @@ public abstract class Product {
 	
 	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			List<SaleOrder_Product> saleOrderProductPair) {
+			List<LineItem> lineItem) {
 		
 		this.id = id;
 		this.name = name;
@@ -57,18 +57,18 @@ public abstract class Product {
 		this.salePrice = salePrice;
 		this.countryOfOrigin = countryOfOrigin;
 		this.minStock = minStock;
-		this.saleOrderProductPair = saleOrderProductPair;
+		this.lineItem = lineItem;
 	}
 	
 	
 	
 	
-	public List<SaleOrder_Product> getSaleOrderProductPair() {
-		return saleOrderProductPair;
+	public List<LineItem> getSaleOrderProductPair() {
+		return lineItem;
 	}
 
-	public void setSaleOrderProductPair(List<SaleOrder_Product> saleOrderProductPair) {
-		this.saleOrderProductPair = saleOrderProductPair;
+	public void setLineItem(List<LineItem> lineItem) {
+		this.lineItem = lineItem;
 	}
 
 	public Supplier getSupplier() {

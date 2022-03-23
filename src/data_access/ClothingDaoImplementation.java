@@ -106,8 +106,8 @@ public class ClothingDaoImplementation implements ClothingDao{
 	}
 
 	@Override
-	public void setSaleOrder_ProductRelatedToThisClothing(Clothing clothing) throws SQLException {
-		DaoFactory.getProductDao().setSaleOrder_ProductRelatedToThisProduct(clothing);
+	public void setLineItemRelatedToThisClothing(Clothing clothing) throws SQLException {
+		DaoFactory.getProductDao().setLineItemRelatedToThisProduct(clothing);
 		
 	}
 

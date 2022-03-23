@@ -166,8 +166,8 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	}
 
 	@Override
-	public boolean setSaleOrder_ProductRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
-		saleOrder.setSaleOrderProductPair(DaoFactory.getSaleOrder_ProductDao().findBySaleOrder(saleOrder));
+	public boolean setLineItemRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
+		saleOrder.setLineItem(DaoFactory.getLineItemDao().findBySaleOrder(saleOrder));
 		return true;
 	}
 

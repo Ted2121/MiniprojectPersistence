@@ -16,7 +16,6 @@ import org.junit.Test;
 import data_access.InvoiceDaoImplementation;
 import data_access.DaoFactory;
 import data_access.DatabaseConnection;
-import model.Customer;
 import model.Invoice;
 
 public class TestInvoiceDaoImplementation {

@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -104,21 +103,21 @@ public class TestSaleOrderDaoImplementation {
 	}
 	
 	@Test
-	public void TestSaleOrderSetSaleOrder_Product() throws SQLException {
+	public void TestSaleOrderSetLineItem() throws SQLException {
 		SaleOrder result = SaleOrderDao.findById(3);
-		SaleOrderDao.setSaleOrder_ProductRelatedToThisSaleOrder(result);
-		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrderProductPair());
+		SaleOrderDao.setLineItemRelatedToThisSaleOrder(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getLineItem());
 	}
 	
 	@Test
 	public void TestSaleOrderSetAll() throws SQLException {
 		SaleOrder result = SaleOrderDao.findById(3);
-		SaleOrderDao.setSaleOrder_ProductRelatedToThisSaleOrder(result);
+		SaleOrderDao.setLineItemRelatedToThisSaleOrder(result);
 		SaleOrderDao.setInvoiceRelatedToThisSaleOrder(result);
 		SaleOrderDao.setCustomerRelatedToThisSaleOrder(result);
 		assertNotNull("The retrieved invoice shouldn't be null", result.getInvoice());
 		assertNotNull("The retrieved invoice shouldn't be null", result.getCustomer());
-		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrderProductPair());
+		assertNotNull("The retrieved invoice shouldn't be null", result.getLineItem());
 	}
 	
 	

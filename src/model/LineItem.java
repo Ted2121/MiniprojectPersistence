@@ -1,13 +1,12 @@
 package model;
 
-import java.util.ArrayList;
 
-public class SaleOrder_Product {
+public class LineItem {
 	private int quantity;
 	private Product product;
 	private SaleOrder order;
 	
-	public SaleOrder_Product(Product product, SaleOrder order, int quantity) {
+	public LineItem(Product product, SaleOrder order, int quantity) {
 		
 		this.quantity = quantity;
 		this.product = product;

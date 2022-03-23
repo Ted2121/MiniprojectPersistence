@@ -1,6 +1,5 @@
 package data_access;
 
-import data_access.*;
 
 public class DaoFactory {
 	private static ClothingDaoImplementation clothingDao;
@@ -10,7 +9,7 @@ public class DaoFactory {
 	private static ProductDaoImplementation productDao;
 	private static SaleOrderDaoImplementation saleOrderDao;
 	private static SupplierDaoImplementation supplierDao;
-	private static SaleOrder_ProductDaoImplementation saleOrder_ProductDao;
+	private static LineItemDaoImplementation LineItemDao;
 	
 	private DaoFactory(){}
 	
@@ -63,11 +62,11 @@ public class DaoFactory {
 		return supplierDao;
 	}
 	
-	public static SaleOrder_ProductDaoImplementation getSaleOrder_ProductDao() {
-		if(saleOrder_ProductDao == null) {
-			saleOrder_ProductDao = new SaleOrder_ProductDaoImplementation();
+	public static LineItemDaoImplementation getLineItemDao() {
+		if(LineItemDao == null) {
+			LineItemDao = new LineItemDaoImplementation();
 		}
-		return saleOrder_ProductDao;
+		return LineItemDao;
 	}
 	
 	

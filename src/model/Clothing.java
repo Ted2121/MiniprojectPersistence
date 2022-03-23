@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Clothing extends Product{
@@ -25,14 +24,14 @@ public class Clothing extends Product{
 	}
 	
 	public Clothing(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			int stock, String size, String color, List<SaleOrder_Product> saleOrderProductPair) {
+			int stock, String size, String color, List<LineItem> saleOrderProductPair) {
 		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
 		this.size = size;
 		this.color = color;
 	}
 	
 	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			int stock, String size, String color, List<SaleOrder_Product> saleOrderProductPair) {
+			int stock, String size, String color, List<LineItem> saleOrderProductPair) {
 		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
 		this.size = size;
 		this.color = color;

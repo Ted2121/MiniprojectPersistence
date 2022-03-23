@@ -118,8 +118,8 @@ public class ItemDaoImplementation implements ItemDao{
 	}
 
 	@Override
-	public void setSaleOrder_ProductRelatedToThisItem(Item item) throws SQLException {
-		DaoFactory.getProductDao().setSaleOrder_ProductRelatedToThisProduct(item);
+	public void setLineItemRelatedToThisItem(Item item) throws SQLException {
+		DaoFactory.getProductDao().setLineItemRelatedToThisProduct(item);
 		
 	}
 

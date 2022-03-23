@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Item;
-import model.Product;
 
 public interface ItemDao {
 	Item findById(int id) throws SQLException;
@@ -14,5 +13,5 @@ public interface ItemDao {
 	boolean update(Item objectToUpdate) throws SQLException;
 	boolean delete(Item objectToDelete) throws SQLException;
 	void setSupplierRelatedToThisItem(Item item) throws SQLException;
-	void setSaleOrder_ProductRelatedToThisItem(Item item) throws SQLException;
+	void setLineItemRelatedToThisItem(Item item) throws SQLException;
 }

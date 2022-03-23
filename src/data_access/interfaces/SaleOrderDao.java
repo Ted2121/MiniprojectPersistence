@@ -16,6 +16,6 @@ public interface SaleOrderDao {
 	boolean delete(SaleOrder objectToDelete) throws SQLException;
 	boolean setInvoiceRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
 	boolean setCustomerRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
-	boolean setSaleOrder_ProductRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
+	boolean setLineItemRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
 	SaleOrder findByInvoice(Invoice invoice) throws SQLException;
 }
