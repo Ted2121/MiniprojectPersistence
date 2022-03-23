@@ -13,12 +13,12 @@ public class SaleOrder {
 	private boolean deliveryStatus;
 	private Customer customer;
 	private Invoice invoice;
-	private int amount;
+	private double amount;
 	private List<SaleOrder_Product> saleOrderProductPair;
 	private int FK_Invoice;
 	private int FK_Customer;
 	
-		public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
+	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
 			Invoice invoice) {
 	
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
@@ -46,6 +46,15 @@ public class SaleOrder {
     public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus) {
 		
     	this.id = id;
+    	this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
+		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
+		this.deliveryStatus = deliveryStatus;
+	}
+    
+    public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, double amount) {
+		
+    	this.id = id;
+    	this.amount = amount;
     	this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
 		this.deliveryStatus = deliveryStatus;
@@ -78,7 +87,7 @@ public class SaleOrder {
 
 	
 	
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
