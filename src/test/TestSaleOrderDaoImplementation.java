@@ -111,10 +111,13 @@ public class TestSaleOrderDaoImplementation {
 		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrderProductPair());
 	}
 	
+	
+	
 	@AfterClass
 	public static void CleanUp() throws SQLException {
 		SaleOrder objectToBeCleanUp = SaleOrderDao.findById(generatedIdCreateTest);
 		SaleOrderDao.delete(objectToBeCleanUp);
 		SaleOrderDao.delete(objectToUpdate);
 	}
+	
 }

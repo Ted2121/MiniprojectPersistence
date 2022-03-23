@@ -27,7 +27,8 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	}
 	
 	private SaleOrder buildObject(ResultSet rs) throws SQLException{
-		SaleOrder buildedObject = new SaleOrder(rs.getInt("id"),rs.getString("orderDate"),rs.getString("deliveryDate"),rs.getBoolean("deliveryStatus"));
+		SaleOrder buildedObject = new SaleOrder(rs.getInt("id"),rs.getString("orderDate"),rs.getString("deliveryDate"),rs.getBoolean("deliveryStatus"),
+				rs.getDouble("amount"));
 		buildedObject.setFK_Invoice(rs.getInt("FK_Invoice"));
 		buildedObject.setFK_Customer(rs.getInt("FK_Customer"));
 		return buildedObject;
@@ -64,7 +65,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 				+ "VALUES(?, ?, ?, ?, ?, ?);";
 		PreparedStatement preparedInsertSaleOrderStatementWithGeneratedKey = connectionDB.prepareStatement(sqlInsertSaleOrderStatement, Statement.RETURN_GENERATED_KEYS);
 		preparedInsertSaleOrderStatementWithGeneratedKey.setString(1, objectToInsert.getOrderDate());
-		preparedInsertSaleOrderStatementWithGeneratedKey.setInt(2, objectToInsert.getAmount());
+		preparedInsertSaleOrderStatementWithGeneratedKey.setDouble(2, objectToInsert.getAmount());
 		preparedInsertSaleOrderStatementWithGeneratedKey.setString(3, objectToInsert.getDeliveryDate());
 		preparedInsertSaleOrderStatementWithGeneratedKey.setBoolean(4, objectToInsert.isDeliveryStatus());
 		preparedInsertSaleOrderStatementWithGeneratedKey.setInt(5, 1); //Hardcoded value TODO Change it with a Invoice ID
@@ -89,7 +90,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 				+ ", FK_Invoice = ?, FK_Customer = ? WHERE id = ?";
 		PreparedStatement preparedUpdateSaleOrderStatement = connectionDB.prepareStatement(sqlUpdateSaleOrderStatement);
 		preparedUpdateSaleOrderStatement.setString(1, objectToUpdate.getOrderDate());
-		preparedUpdateSaleOrderStatement.setInt(2, objectToUpdate.getAmount());
+		preparedUpdateSaleOrderStatement.setDouble(2, objectToUpdate.getAmount());
 		preparedUpdateSaleOrderStatement.setString(3, objectToUpdate.getDeliveryDate());
 		preparedUpdateSaleOrderStatement.setBoolean(4, objectToUpdate.isDeliveryStatus());
 		preparedUpdateSaleOrderStatement.setInt(5, objectToUpdate.getInvoice().getId());
