@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Customer {
 	
 	private int id;
@@ -9,6 +11,7 @@ public class Customer {
 	private int zipcode;
 	private String phoneNo;
 	private String type;
+	private List<SaleOrder> saleOrders;
 	
 	public Customer(String name, String address, String city, int zipcode, String phoneNo, String type) {
 		
@@ -89,6 +92,18 @@ public class Customer {
 	
 	public void setType(String type) {
 		this.type = type;
+	}
+
+
+
+	public List<SaleOrder> getSaleOrders() {
+		return saleOrders;
+	}
+
+
+
+	public void setSaleOrders(List<SaleOrder> saleOrders) {
+		this.saleOrders = saleOrders;
 	}
 
 
