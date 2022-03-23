@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Product {
 	
@@ -10,8 +10,9 @@ public abstract class Product {
 	private double salePrice;
 	private String countryOfOrigin;
 	private int minStock;
-	private SaleOrder_Product saleOrderProductPair;
+	private List<SaleOrder_Product> saleOrderProductPair;
 	private Supplier supplier;
+	private int FK_Supplier;
 	private int stock;
 	
 	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock) {
@@ -26,7 +27,7 @@ public abstract class Product {
 	}
 
 	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			SaleOrder_Product saleOrderProductPair) {
+			List<SaleOrder_Product> saleOrderProductPair) {
 		
 		this.name = name;
 		this.purchasePrice = purchasePrice;
@@ -48,7 +49,7 @@ public abstract class Product {
 	
 	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			SaleOrder_Product saleOrderProductPair) {
+			List<SaleOrder_Product> saleOrderProductPair) {
 		
 		this.id = id;
 		this.name = name;
@@ -62,11 +63,11 @@ public abstract class Product {
 	
 	
 	
-	public SaleOrder_Product getSaleOrderProductPair() {
+	public List<SaleOrder_Product> getSaleOrderProductPair() {
 		return saleOrderProductPair;
 	}
 
-	public void setSaleOrderProductPair(SaleOrder_Product saleOrderProductPair) {
+	public void setSaleOrderProductPair(List<SaleOrder_Product> saleOrderProductPair) {
 		this.saleOrderProductPair = saleOrderProductPair;
 	}
 
@@ -134,6 +135,14 @@ public abstract class Product {
 
 	public void setMinStock(int minStock) {
 		this.minStock = minStock;
+	}
+	
+	public int getFK_Supplier() {
+		return FK_Supplier;
+	}
+
+	public void setFK_Supplier(int fK_Supplier) {
+		FK_Supplier = fK_Supplier;
 	}
 	
 }

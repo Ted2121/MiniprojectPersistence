@@ -53,6 +53,10 @@ public class Clothing extends Product{
 		this.color = color;
 	}
 	
+	public void setSupplier(int FK_Supplier) {
+		super.setFK_Supplier(FK_Supplier);
+	}
+	
 	
 	
 }

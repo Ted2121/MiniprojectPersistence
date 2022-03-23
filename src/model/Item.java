@@ -48,6 +48,10 @@ public class Item extends Product{
 		this.description = description;
 	}
 	
+	public void setFK_Supplier(int FK_Supplier) {
+		super.setFK_Supplier(FK_Supplier);
+	}
+	
 	
 	
 }
