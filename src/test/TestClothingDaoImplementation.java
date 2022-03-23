@@ -17,6 +17,7 @@ import data_access.ClothingDaoImplementation;
 import data_access.DaoFactory;
 import data_access.DatabaseConnection;
 import model.Clothing;
+import model.Item;
 
 public class TestClothingDaoImplementation {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -65,6 +66,20 @@ public class TestClothingDaoImplementation {
 		clothingDao.update(objectToUpdate);
 		
 		assertEquals("Should display updatedTestingObject", "updatedTestingObject" , clothingDao.findById(objectToUpdate.getId()).getName());
+	}
+	
+	@Test
+	public void TestClothingSetSupplier() throws SQLException {
+		Clothing result = clothingDao.findById(1);
+		clothingDao.setSupplierRelatedToThisClothing(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getSupplier());
+	}
+	
+	@Test
+	public void TestClothingSetSaleOrder_Product() throws SQLException {
+		Clothing result = clothingDao.findById(1);
+		clothingDao.setSaleOrder_ProductRelatedToThisClothing(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrderProductPair());
 	}
 	
 	@AfterClass

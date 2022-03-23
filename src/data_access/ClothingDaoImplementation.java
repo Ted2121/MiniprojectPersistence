@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ClothingDaoImplementation implements ClothingDao{
 		
 		Clothing buildedObject = new Clothing(rs.getInt("id"),rs.getString("name"), rs.getDouble("purchasePrice"), rs.getDouble("salesPrice"),
 				rs.getString("countryOfOrigin"), rs.getInt("minStock"), rs.getInt("stock"), rs.getString("size"), rs.getString("color"));
-		
+		buildedObject.setFK_Supplier(rs.getInt("FK_Supplier"));
 		return buildedObject;
 	}
 
@@ -86,7 +85,6 @@ public class ClothingDaoImplementation implements ClothingDao{
 		preparedUpdateClothingStatement.setInt(3, objectToUpdate.getId());
 
 		preparedUpdateClothingStatement.execute();
-		
 		return true;
 	}
 
@@ -98,8 +96,20 @@ public class ClothingDaoImplementation implements ClothingDao{
 		PreparedStatement preparedDeleteClothingStatement = connectionDB.prepareStatement(sqlDeleteClothingStatement);
 		preparedDeleteClothingStatement.setInt(1, objectToDelete.getId());
 		preparedDeleteClothingStatement.execute();
-		
 		return true;
 	}
+
+	@Override
+	public void setSupplierRelatedToThisClothing(Clothing clothing) throws SQLException {
+		DaoFactory.getProductDao().setSupplierRelatedToThisProduct(clothing);
+		
+	}
+
+	@Override
+	public void setSaleOrder_ProductRelatedToThisClothing(Clothing clothing) throws SQLException {
+		DaoFactory.getProductDao().setSaleOrder_ProductRelatedToThisProduct(clothing);
+		
+	}
+
 
 }
