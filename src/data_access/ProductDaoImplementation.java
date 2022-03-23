@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import data_access.interfaces.ProductDao;
+import model.Item;
 import model.Product;
+import model.SaleOrder;
 
 public class ProductDaoImplementation implements ProductDao {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -35,7 +37,7 @@ public class ProductDaoImplementation implements ProductDao {
 	}
 
 	@Override
-	public void update(Product objectToUpdate) throws SQLException {
+	public boolean update(Product objectToUpdate) throws SQLException {
 		String sqlUpdateProductStatement = "UPDATE Product SET [name] = ?, purchasePrice = ?, salesPrice = ?, countryOfOrigin = ?, minStock = ?, stock = ?, FK_Supplier = ? WHERE id = ?";
 		PreparedStatement preparedUpdateProductStatement = connectionDB.prepareStatement(sqlUpdateProductStatement);
 		preparedUpdateProductStatement.setString(1, objectToUpdate.getName());
@@ -48,14 +50,26 @@ public class ProductDaoImplementation implements ProductDao {
 		preparedUpdateProductStatement.setInt(8, objectToUpdate.getId());
 		
 		preparedUpdateProductStatement.execute();
+		return true;
 	}
 
 	@Override
-	public void delete(Product objectToDelete) throws SQLException {
+	public boolean delete(Product objectToDelete) throws SQLException {
 		String sqlDeleteClothingStatement = "DELETE FROM Clothing WHERE id = ?";
 		PreparedStatement preparedDeleteClothingStatement = connectionDB.prepareStatement(sqlDeleteClothingStatement);
 		preparedDeleteClothingStatement.setInt(1, objectToDelete.getId());
 		preparedDeleteClothingStatement.execute();
+		return true;
+	}
+
+	@Override
+	public void setSupplierRelatedToThisProduct(Product product) throws SQLException {
+		product.setSupplier(DaoFactory.getSupplierDao().findById(product.getFK_Supplier()));
+	}
+
+	@Override
+	public void setSaleOrder_ProductRelatedToThisProduct(Product product) throws SQLException {
+		product.setSaleOrderProductPair(DaoFactory.getSaleOrder_ProductDao().findByProduct(product));
 	}
 
 }
