@@ -26,6 +26,8 @@ public class SaleOrder {
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
+		this.FK_Invoice = invoice.getId();
+		this.FK_Customer = customer.getId();
 	}
 	
 	
