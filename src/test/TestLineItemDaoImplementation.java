@@ -22,7 +22,7 @@ import model.LineItem;
 
 public class TestLineItemDaoImplementation {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
-	static LineItemDaoImplementation LineItemDao = DaoFactory.getLineItemDao();
+	static LineItemDaoImplementation lineItemDao = DaoFactory.getLineItemDao();
 	static int generatedIdCreateTest;
 	static LineItem objectToDelete;
 	static LineItem objectToUpdate;
@@ -35,34 +35,34 @@ public class TestLineItemDaoImplementation {
 		SaleOrder saleOrder2 = DaoFactory.getSaleOrderDao().findById(2); 
 		objectToDelete = new LineItem(product,saleOrder, 12 ); 
 		objectToUpdate = new LineItem(product2,saleOrder2, 12 ); 
-		LineItemDao.create(objectToDelete);
-		LineItemDao.create(objectToUpdate);
+		lineItemDao.create(objectToDelete);
+		lineItemDao.create(objectToUpdate);
 	}
 	
 	
 	@Test
 	public void TestLineItemFindBySaleOrder() throws SQLException {
 		SaleOrder saleOrder = DaoFactory.getSaleOrderDao().findById(1); 
-		List<LineItem> result = LineItemDao.findBySaleOrder(saleOrder);
+		List<LineItem> result = lineItemDao.findBySaleOrder(saleOrder);
 		assertFalse("The retrieved object size should greater than 0", result.isEmpty());
 	}
 	
 	@Test
 	public void TestLineItemFindByProduct() throws SQLException {
 		Product product = DaoFactory.getClothingDao().findById(1); 
-		List<LineItem> result = LineItemDao.findByProduct(product);
+		List<LineItem> result = lineItemDao.findByProduct(product);
 		assertFalse("The retrieved object size should greater than 0", result.isEmpty());
 	}
 	
 	@Test
 	public void TestLineItemById() throws SQLException {
-		LineItem result = LineItemDao.findById(1,1);
+		LineItem result = lineItemDao.findById(1,1);
 		assertNotNull("The retrieved object shouldn't be null", result);
 	}
 	
 	@Test
 	public void TestLineItemFindAll() throws SQLException {
-		List<LineItem> result = LineItemDao.findAll();
+		List<LineItem> result = lineItemDao.findAll();
 		assertFalse("The retrieved object size should greater than 0", result.isEmpty());
 	}
 	
@@ -71,28 +71,28 @@ public class TestLineItemDaoImplementation {
 		Product product = DaoFactory.getItemDao().findById(3); 
 		SaleOrder saleOrder = DaoFactory.getSaleOrderDao().findById(1); 
 		LineItem testLineItem = new LineItem(product,saleOrder, 12 ); 
-		boolean isSucceeded = LineItemDao.create(testLineItem);
+		boolean isSucceeded = lineItemDao.create(testLineItem);
 		assertTrue("The retrieved object should be added", isSucceeded);
 	}
 	
 	@Test
 	public void TestLineItemDelete() throws SQLException {
-		boolean isSucceeded = LineItemDao.delete(objectToDelete);
+		boolean isSucceeded = lineItemDao.delete(objectToDelete);
 		assertTrue("Should have deletes the object ", isSucceeded);
 	}
 	
 	@Test
 	public void TestLineItemUpdate() throws SQLException {
 		objectToUpdate.setQuantity(100);
-		LineItemDao.update(objectToUpdate);
+		lineItemDao.update(objectToUpdate);
 		
-		assertEquals("Should display 100", 100 , LineItemDao.findById(objectToUpdate.getOrder().getId(), objectToUpdate.getProduct().getId()).getQuantity());
+		assertEquals("Should display 100", 100 , lineItemDao.findById(objectToUpdate.getOrder().getId(), objectToUpdate.getProduct().getId()).getQuantity());
 	}
 	
 	@AfterClass
 	public static void CleanUp() throws SQLException {
-		LineItem objectToBeCleanUp = LineItemDao.findById(1,3);
-		LineItemDao.delete(objectToBeCleanUp);
-		LineItemDao.delete(objectToUpdate);
+		LineItem objectToBeCleanUp = lineItemDao.findById(1,3);
+		lineItemDao.delete(objectToBeCleanUp);
+		lineItemDao.delete(objectToUpdate);
 	}
 }

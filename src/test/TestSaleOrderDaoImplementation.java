@@ -21,7 +21,7 @@ import model.SaleOrder;
 
 public class TestSaleOrderDaoImplementation {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
-	static SaleOrderDaoImplementation SaleOrderDao = DaoFactory.getSaleOrderDao();
+	static SaleOrderDaoImplementation saleOrderDao = DaoFactory.getSaleOrderDao();
 	static int generatedIdCreateTest;
 	static SaleOrder objectToDelete;
 	static SaleOrder objectToUpdate;
@@ -34,87 +34,87 @@ public class TestSaleOrderDaoImplementation {
 	public static void CreatingTheTuppleToDelete () throws SQLException {
 		customer = DaoFactory.getCustomerDao().findAll().get(1);
 		customer2 = DaoFactory.getCustomerDao().findAll().get(2);
-		invoice = DaoFactory.getInvoiceDao().findById(5);
-		invoice2 = DaoFactory.getInvoiceDao().findById(6);
+		invoice = DaoFactory.getInvoiceDao().findByInvoiceNumber("47-TPH-5629");
+		invoice2 = DaoFactory.getInvoiceDao().findByInvoiceNumber("48-TPH-5629");
 		objectToDelete = new SaleOrder("2022-02-01 00:00:00:000", "2022-02-06 00:00:00:000", false, customer, invoice); 
 		objectToUpdate = new SaleOrder("2022-02-01 00:00:00:000", "2022-02-06 00:00:00:000", false, customer2, invoice2); 
-		SaleOrderDao.create(objectToDelete);
-		SaleOrderDao.create(objectToUpdate);
+		saleOrderDao.create(objectToDelete);
+		saleOrderDao.create(objectToUpdate);
 	}
 	
 	
 	@Test
 	public void TestSaleOrderFindById() throws SQLException {
-		SaleOrder result = SaleOrderDao.findById(3);
+		SaleOrder result = saleOrderDao.findById(3);
 		assertNotNull("The retrieved object shouldn't be null", result);
 	}
 	
 	@Test
 	public void TestSaleOrderFindByCustomer() throws SQLException {
-		List<SaleOrder> result = SaleOrderDao.findByCustomer(customer);
+		List<SaleOrder> result = saleOrderDao.findByCustomer(customer);
 		assertFalse("The retrieved list shouldn't be empty", result.isEmpty());
 	}
 	
 	@Test
 	public void TestSaleOrderFindByInvoice() throws SQLException {
-		SaleOrder result = SaleOrderDao.findByInvoice(invoice);
+		SaleOrder result = saleOrderDao.findByInvoice(invoice);
 		assertNotNull("The retrieved list shouldn't be empty", result);
 	}
 	
 	@Test
 	public void TestSaleOrderFindAll() throws SQLException {
-		List<SaleOrder> result = SaleOrderDao.findAll();
+		List<SaleOrder> result = saleOrderDao.findAll();
 		assertFalse("The retrieved list shouldn't be empty", result.isEmpty());
 	}
 	
 	@Test
 	public void TestSaleOrderInsert() throws SQLException {
 		SaleOrder testSaleOrder = new SaleOrder("2022-02-01 00:00:00:000", "2022-02-06 00:00:00:000", false, customer, invoice); 
-		generatedIdCreateTest = SaleOrderDao.create(testSaleOrder);
-		assertNotNull("The retrieved object shouldn't be null", SaleOrderDao.findById(generatedIdCreateTest));
+		generatedIdCreateTest = saleOrderDao.create(testSaleOrder);
+		assertNotNull("The retrieved object shouldn't be null", saleOrderDao.findById(generatedIdCreateTest));
 	}
 	
 	@Test
 	public void TestSaleOrderDelete() throws SQLException {
-		boolean isSucceeded = SaleOrderDao.delete(objectToDelete);
+		boolean isSucceeded = saleOrderDao.delete(objectToDelete);
 		assertTrue("Should have deletes the object ", isSucceeded);
 	}
 	
 	@Test
 	public void TestSaleOrderUpdate() throws SQLException {
 		objectToUpdate.setDeliveryStatus(true);
-		SaleOrderDao.update(objectToUpdate);
+		saleOrderDao.update(objectToUpdate);
 		
-		assertTrue("Should display updatedTestingObject", SaleOrderDao.findById(objectToUpdate.getId()).isDeliveryStatus());
+		assertTrue("Should display updatedTestingObject", saleOrderDao.findById(objectToUpdate.getId()).isDeliveryStatus());
 	}
 	
 	@Test
 	public void TestSaleOrderSetInvoice() throws SQLException {
-		SaleOrder result = SaleOrderDao.findById(3);
-		SaleOrderDao.setInvoiceRelatedToThisSaleOrder(result);
+		SaleOrder result = saleOrderDao.findById(3);
+		saleOrderDao.setInvoiceRelatedToThisSaleOrder(result);
 		assertNotNull("The retrieved invoice shouldn't be null", result.getInvoice());
 	}
 	
 	@Test
 	public void TestSaleOrderSetCustomer() throws SQLException {
-		SaleOrder result = SaleOrderDao.findById(3);
-		SaleOrderDao.setCustomerRelatedToThisSaleOrder(result);
+		SaleOrder result = saleOrderDao.findById(3);
+		saleOrderDao.setCustomerRelatedToThisSaleOrder(result);
 		assertNotNull("The retrieved invoice shouldn't be null", result.getCustomer());
 	}
 	
 	@Test
 	public void TestSaleOrderSetLineItem() throws SQLException {
-		SaleOrder result = SaleOrderDao.findById(3);
-		SaleOrderDao.setLineItemRelatedToThisSaleOrder(result);
+		SaleOrder result = saleOrderDao.findById(3);
+		saleOrderDao.setLineItemRelatedToThisSaleOrder(result);
 		assertNotNull("The retrieved invoice shouldn't be null", result.getLineItem());
 	}
 	
 	@Test
 	public void TestSaleOrderSetAll() throws SQLException {
-		SaleOrder result = SaleOrderDao.findById(3);
-		SaleOrderDao.setLineItemRelatedToThisSaleOrder(result);
-		SaleOrderDao.setInvoiceRelatedToThisSaleOrder(result);
-		SaleOrderDao.setCustomerRelatedToThisSaleOrder(result);
+		SaleOrder result = saleOrderDao.findById(3);
+		saleOrderDao.setLineItemRelatedToThisSaleOrder(result);
+		saleOrderDao.setInvoiceRelatedToThisSaleOrder(result);
+		saleOrderDao.setCustomerRelatedToThisSaleOrder(result);
 		assertNotNull("The retrieved invoice shouldn't be null", result.getInvoice());
 		assertNotNull("The retrieved invoice shouldn't be null", result.getCustomer());
 		assertNotNull("The retrieved invoice shouldn't be null", result.getLineItem());
@@ -124,9 +124,9 @@ public class TestSaleOrderDaoImplementation {
 	
 	@AfterClass
 	public static void CleanUp() throws SQLException {
-		SaleOrder objectToBeCleanUp = SaleOrderDao.findById(generatedIdCreateTest);
-		SaleOrderDao.delete(objectToBeCleanUp);
-		SaleOrderDao.delete(objectToUpdate);
+		SaleOrder objectToBeCleanUp = saleOrderDao.findById(generatedIdCreateTest);
+		saleOrderDao.delete(objectToBeCleanUp);
+		saleOrderDao.delete(objectToUpdate);
 	}
 	
 }

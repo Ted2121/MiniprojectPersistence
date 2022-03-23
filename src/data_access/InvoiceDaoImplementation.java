@@ -24,15 +24,15 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 	}
 	
 	private Invoice buildObject(ResultSet rs) throws SQLException{
-		Invoice buildedObject = new Invoice(rs.getInt("id"),rs.getString("invoiceno"), rs.getString("paymentDate") , rs.getDouble("amount"));
+		Invoice buildedObject = new Invoice(rs.getString("invoiceno"), rs.getString("paymentDate") , rs.getDouble("amount"));
 		return buildedObject;
 	}
 
 	@Override
-	public Invoice findById(int id) throws SQLException {
-		String query = "SELECT * FROM Invoice WHERE id = ?";
+	public Invoice findByInvoiceNumber(String invoiceNo) throws SQLException {
+		String query = "SELECT * FROM Invoice WHERE [invoiceno] = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
-		preparedSelectStatement.setLong(1, id);
+		preparedSelectStatement.setString(1, invoiceNo);
 		ResultSet rs = preparedSelectStatement.executeQuery();	
 		Invoice retrievedInvoice = null;
 		while(rs.next()) {
@@ -53,32 +53,24 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 	}
 
 	@Override
-	public int create(Invoice objectToInsert) throws SQLException {
+	public void create(Invoice objectToInsert) throws SQLException {
 		String sqlInsertInvoiceStatement = "INSERT INTO Invoice(invoiceno, paymentDate, amount) VALUES(?, ?, ?);";
-		PreparedStatement preparedInsertInvoiceStatementWithGeneratedKey = connectionDB.prepareStatement(sqlInsertInvoiceStatement, Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement preparedInsertInvoiceStatementWithGeneratedKey = connectionDB.prepareStatement(sqlInsertInvoiceStatement);
 		preparedInsertInvoiceStatementWithGeneratedKey.setString(1, objectToInsert.getInvoiceNo());
 		preparedInsertInvoiceStatementWithGeneratedKey.setString(2, objectToInsert.getPaymentDate() );
 		preparedInsertInvoiceStatementWithGeneratedKey.setDouble(3, objectToInsert.getAmount());
 		
-		preparedInsertInvoiceStatementWithGeneratedKey.executeUpdate();
-		ResultSet tableContainingGenratedIds = preparedInsertInvoiceStatementWithGeneratedKey.getGeneratedKeys();
-		int generatedId = 0;
-		while(tableContainingGenratedIds.next()) {
-			generatedId = tableContainingGenratedIds.getInt(1);
-		}
-		objectToInsert.setId(generatedId);
+		preparedInsertInvoiceStatementWithGeneratedKey.execute();
 		
-		return generatedId;
 	}
 
 	@Override
 	public boolean update(Invoice objectToUpdate) throws SQLException {
-		String sqlUpdateInvoiceStatement = "UPDATE Invoice SET invoiceno = ?, paymentDate = ?, amount= ? WHERE id = ?";
+		String sqlUpdateInvoiceStatement = "UPDATE Invoice SET paymentDate = ?, amount= ? WHERE invoiceno = ?";
 		PreparedStatement preparedUpdateInvoiceStatement = connectionDB.prepareStatement(sqlUpdateInvoiceStatement);
-		preparedUpdateInvoiceStatement.setString(1, objectToUpdate.getInvoiceNo());
-		preparedUpdateInvoiceStatement.setString(2, objectToUpdate.getPaymentDate());
-		preparedUpdateInvoiceStatement.setDouble(3, objectToUpdate.getAmount());
-		preparedUpdateInvoiceStatement.setInt(4, objectToUpdate.getId());
+		preparedUpdateInvoiceStatement.setString(1, objectToUpdate.getPaymentDate());
+		preparedUpdateInvoiceStatement.setDouble(2, objectToUpdate.getAmount());
+		preparedUpdateInvoiceStatement.setString(3, objectToUpdate.getInvoiceNo());
 
 		preparedUpdateInvoiceStatement.execute();
 		
@@ -87,9 +79,9 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 
 	@Override
 	public boolean delete(Invoice objectToDelete) throws SQLException {
-		String sqlDeleteInvoiceStatement = "DELETE FROM Invoice WHERE id = ?";
+		String sqlDeleteInvoiceStatement = "DELETE FROM Invoice WHERE invoiceno = ?";
 		PreparedStatement preparedDeleteInvoiceStatement = connectionDB.prepareStatement(sqlDeleteInvoiceStatement);
-		preparedDeleteInvoiceStatement.setInt(1, objectToDelete.getId());
+		preparedDeleteInvoiceStatement.setString(1, objectToDelete.getInvoiceNo());
 		preparedDeleteInvoiceStatement.execute();
 		
 		return true;

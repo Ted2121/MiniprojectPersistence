@@ -13,7 +13,7 @@ public class SaleOrder {
 	private Invoice invoice;
 	private double amount;
 	private List<LineItem> lineItem;
-	private int FK_Invoice;
+	private String FK_Invoice;
 	private int FK_Customer;
 	
 	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
@@ -24,13 +24,9 @@ public class SaleOrder {
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
 		this.invoice = invoice;
-		this.FK_Invoice = invoice.getId();
+		this.FK_Invoice = invoice.getInvoiceNo();
 		this.FK_Customer = customer.getId();
 	}
-	
-	
-
-	
 
     public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
 			Invoice invoice) {
@@ -166,11 +162,11 @@ public class SaleOrder {
 		this.invoice = invoice;
 	}
 
-	public int getFK_Invoice() {
+	public String getFK_Invoice() {
 		return FK_Invoice;
 	}
 
-	public void setFK_Invoice(int fK_Invoice) {
+	public void setFK_Invoice(String fK_Invoice) {
 		FK_Invoice = fK_Invoice;
 	}
 	

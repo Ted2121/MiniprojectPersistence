@@ -31,7 +31,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	private SaleOrder buildObject(ResultSet rs) throws SQLException{
 		SaleOrder buildedObject = new SaleOrder(rs.getInt("id"),rs.getString("orderDate"),rs.getString("deliveryDate"),rs.getBoolean("deliveryStatus"),
 				rs.getDouble("amount"));
-		buildedObject.setFK_Invoice(rs.getInt("FK_Invoice"));
+		buildedObject.setFK_Invoice(rs.getString("FK_Invoice"));
 		buildedObject.setFK_Customer(rs.getInt("FK_Customer"));
 		return buildedObject;
 	}
@@ -70,11 +70,11 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 		preparedInsertSaleOrderStatementWithGeneratedKey.setDouble(2, objectToInsert.getAmount());
 		preparedInsertSaleOrderStatementWithGeneratedKey.setString(3, objectToInsert.getDeliveryDate());
 		preparedInsertSaleOrderStatementWithGeneratedKey.setBoolean(4, objectToInsert.isDeliveryStatus());
-		if(objectToInsert.getFK_Invoice() != 0) {
+		if(!objectToInsert.getFK_Invoice().equals(null)) {
 			DaoFactory.getSaleOrderDao().setInvoiceRelatedToThisSaleOrder(objectToInsert);
-			preparedInsertSaleOrderStatementWithGeneratedKey.setInt(5, objectToInsert.getInvoice().getId());
+			preparedInsertSaleOrderStatementWithGeneratedKey.setString(5, objectToInsert.getInvoice().getInvoiceNo());
 		}else {
-			preparedInsertSaleOrderStatementWithGeneratedKey.setNull(5, Types.INTEGER);
+			preparedInsertSaleOrderStatementWithGeneratedKey.setNull(5, Types.NVARCHAR);
 		}
 		
 		if(objectToInsert.getFK_Customer() != 0) {
@@ -106,7 +106,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 		preparedUpdateSaleOrderStatement.setDouble(2, objectToUpdate.getAmount());
 		preparedUpdateSaleOrderStatement.setString(3, objectToUpdate.getDeliveryDate());
 		preparedUpdateSaleOrderStatement.setBoolean(4, objectToUpdate.isDeliveryStatus());
-		preparedUpdateSaleOrderStatement.setInt(5, objectToUpdate.getInvoice().getId());
+		preparedUpdateSaleOrderStatement.setString(5, objectToUpdate.getInvoice().getInvoiceNo());
 		preparedUpdateSaleOrderStatement.setInt(6, objectToUpdate.getCustomer().getId());
 		preparedUpdateSaleOrderStatement.setInt(7, objectToUpdate.getId());
 
@@ -142,7 +142,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	public SaleOrder findByInvoice(Invoice invoice) throws SQLException{
 		String query = "SELECT * FROM SaleOrder WHERE FK_Invoice = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
-		preparedSelectStatement.setLong(1, invoice.getId());
+		preparedSelectStatement.setString(1, invoice.getInvoiceNo());
 		
 		ResultSet rs = preparedSelectStatement.executeQuery();
 		SaleOrder retrievedSaleOrderList = null;
@@ -155,7 +155,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 
 	@Override
 	public boolean setInvoiceRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
-		saleOrder.setInvoice(DaoFactory.getInvoiceDao().findById(saleOrder.getFK_Invoice()));
+		saleOrder.setInvoice(DaoFactory.getInvoiceDao().findByInvoiceNumber(saleOrder.getFK_Invoice()));
 		return true;
 	}
 

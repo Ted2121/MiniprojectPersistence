@@ -3,33 +3,16 @@ package model;
 import java.time.LocalDateTime;
 
 public class Invoice {
-	private int id;
 	private String invoiceNo;
 	private String paymentDate;
 	private double amount;
 	private SaleOrder saleOrder;
-	
-	public Invoice(int id, String invoiceNo, String paymentDate, double amount) {
-		
-		this.id = id;
-		this.invoiceNo = invoiceNo;
-		this.paymentDate = LocalDateTime.now().format(HelperModelClass.getFormat());
-		this.amount = amount;
-	}
 
 	public Invoice(String invoiceNo, String paymentDate, double amount) {
 		
 		this.invoiceNo = invoiceNo;
 		this.paymentDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.amount = amount;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getInvoiceNo() {
@@ -63,6 +46,7 @@ public class Invoice {
 	public void setSaleOrder(SaleOrder saleOrder) {
 		this.saleOrder = saleOrder;
 	}
+
 
 	
 	

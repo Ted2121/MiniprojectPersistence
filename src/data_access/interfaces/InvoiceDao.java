@@ -7,10 +7,11 @@ import java.util.List;
 import model.Invoice;
 
 public interface InvoiceDao {
-	Invoice findById(int id) throws SQLException;
+	Invoice findByInvoiceNumber(String invoiceNo) throws SQLException;
 	List<Invoice> findAll() throws SQLException;
-	int create(Invoice objectToInsert) throws SQLException, ParseException;
+	void create(Invoice objectToInsert) throws SQLException, ParseException;
 	boolean update(Invoice objectToUpdate) throws SQLException;
 	boolean delete(Invoice objectToDelete) throws SQLException;
 	void setSalesOrderRelatedToThisInvoice(Invoice invoice) throws SQLException;
+	
 }
