@@ -13,4 +13,7 @@ public interface SaleOrderDao {
 	int create(SaleOrder objectToInsert) throws SQLException;
 	boolean update(SaleOrder objectToUpdate) throws SQLException;
 	boolean delete(SaleOrder objectToDelete) throws SQLException;
+	boolean setInvoiceRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
+	boolean setCustomerRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
+	boolean setSaleOrder_ProductRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
 }

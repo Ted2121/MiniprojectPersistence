@@ -28,6 +28,8 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	
 	private SaleOrder buildObject(ResultSet rs) throws SQLException{
 		SaleOrder buildedObject = new SaleOrder(rs.getInt("id"),rs.getString("orderDate"),rs.getString("deliveryDate"),rs.getBoolean("deliveryStatus"));
+		buildedObject.setFK_Invoice(rs.getInt("FK_Invoice"));
+		buildedObject.setFK_Customer(rs.getInt("FK_Customer"));
 		return buildedObject;
 	}
 
@@ -120,6 +122,24 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 		List<SaleOrder> retrievedSaleOrderList = buildObjects(rs);
 
 		return retrievedSaleOrderList;
+	}
+
+	@Override
+	public boolean setInvoiceRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
+		saleOrder.setInvoice(DaoFactory.getInvoiceDao().findById(saleOrder.getFK_Invoice()));
+		return true;
+	}
+
+	@Override
+	public boolean setCustomerRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
+		saleOrder.setCustomer(DaoFactory.getCustomerDao().findById(saleOrder.getFK_Customer()));
+		return true;
+	}
+
+	@Override
+	public boolean setSaleOrder_ProductRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
+		saleOrder.setSaleOrderProductPair(DaoFactory.getSaleOrder_ProductDao().findBySaleOrder(saleOrder));
+		return true;
 	}
 
 }

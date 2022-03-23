@@ -79,6 +79,38 @@ public class TestSaleOrderDaoImplementation {
 		assertTrue("Should display updatedTestingObject", SaleOrderDao.findById(objectToUpdate.getId()).isDeliveryStatus());
 	}
 	
+	@Test
+	public void TestSaleOrderSetInvoice() throws SQLException {
+		SaleOrder result = SaleOrderDao.findById(3);
+		SaleOrderDao.setInvoiceRelatedToThisSaleOrder(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getInvoice());
+	}
+	
+	@Test
+	public void TestSaleOrderSetCustomer() throws SQLException {
+		SaleOrder result = SaleOrderDao.findById(3);
+		SaleOrderDao.setCustomerRelatedToThisSaleOrder(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getCustomer());
+	}
+	
+	@Test
+	public void TestSaleOrderSetSaleOrder_Product() throws SQLException {
+		SaleOrder result = SaleOrderDao.findById(3);
+		SaleOrderDao.setSaleOrder_ProductRelatedToThisSaleOrder(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrderProductPair());
+	}
+	
+	@Test
+	public void TestSaleOrderSetAll() throws SQLException {
+		SaleOrder result = SaleOrderDao.findById(3);
+		SaleOrderDao.setSaleOrder_ProductRelatedToThisSaleOrder(result);
+		SaleOrderDao.setInvoiceRelatedToThisSaleOrder(result);
+		SaleOrderDao.setCustomerRelatedToThisSaleOrder(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getInvoice());
+		assertNotNull("The retrieved invoice shouldn't be null", result.getCustomer());
+		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrderProductPair());
+	}
+	
 	@AfterClass
 	public static void CleanUp() throws SQLException {
 		SaleOrder objectToBeCleanUp = SaleOrderDao.findById(generatedIdCreateTest);
