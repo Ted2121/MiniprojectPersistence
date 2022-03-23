@@ -17,10 +17,11 @@ import data_access.CustomerDaoImplementation;
 import data_access.DaoFactory;
 import data_access.DatabaseConnection;
 import model.Customer;
+import model.SaleOrder;
 
 public class TestCustomerDaoImplementation {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
-	static CustomerDaoImplementation CustomerDao = DaoFactory.getCustomerDao();
+	static CustomerDaoImplementation customerDao = DaoFactory.getCustomerDao();
 	static int generatedIdCreateTest;
 	static Customer objectToDelete;
 	static Customer objectToUpdate;
@@ -29,48 +30,55 @@ public class TestCustomerDaoImplementation {
 	public static void CreatingTheTuppleToDelete () throws SQLException {
 		objectToDelete = new Customer("testCustomer", "place", "aCity", 9000, "phoneNumber", "club"); 
 		objectToUpdate = new Customer("testCustomer", "place", "aCity", 9000, "phoneNumber", "club"); 
-		CustomerDao.create(objectToDelete);
-		CustomerDao.create(objectToUpdate);
+		customerDao.create(objectToDelete);
+		customerDao.create(objectToUpdate);
 	}
 	
 	
 	@Test
 	public void TestCustomerFindById() throws SQLException {
-		Customer result = CustomerDao.findById(1);
+		Customer result = customerDao.findById(1);
 		assertNotNull("The retrieved object shouldn't be null", result);
 	}
 	
 	@Test
 	public void TestCustomerFindAll() throws SQLException {
-		List<Customer> result = CustomerDao.findAll();
+		List<Customer> result = customerDao.findAll();
 		assertFalse("The retrieved list shouldn't be empty", result.isEmpty());
 	}
 	
 	@Test
 	public void TestCustomerInsert() throws SQLException {
 		Customer testCustomer = new Customer("testCustomer", "place", "aCity", 9000, "phoneNumber", "club"); 
-		generatedIdCreateTest = CustomerDao.create(testCustomer);
-		assertNotNull("The retrieved object shouldn't be null", CustomerDao.findById(generatedIdCreateTest));
+		generatedIdCreateTest = customerDao.create(testCustomer);
+		assertNotNull("The retrieved object shouldn't be null", customerDao.findById(generatedIdCreateTest));
 	}
 	
 	@Test
 	public void TestCustomerDelete() throws SQLException {
-		boolean isSucceeded = CustomerDao.delete(objectToDelete);
+		boolean isSucceeded = customerDao.delete(objectToDelete);
 		assertTrue("Should have deletes the object ", isSucceeded);
 	}
 	
 	@Test
 	public void TestCustomerUpdate() throws SQLException {
 		objectToUpdate.setName("updatedTestingObject");
-		CustomerDao.update(objectToUpdate);
+		customerDao.update(objectToUpdate);
 		
-		assertEquals("Should display updatedTestingObject", "updatedTestingObject" , CustomerDao.findById(objectToUpdate.getId()).getName());
+		assertEquals("Should display updatedTestingObject", "updatedTestingObject" , customerDao.findById(objectToUpdate.getId()).getName());
+	}
+	
+	@Test
+	public void TestCustomerSetSaleOrder() throws SQLException {
+		Customer result = customerDao.findById(1);
+		customerDao.setSalesOrderRelatedToThisCustomer(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrders());
 	}
 	
 	@AfterClass
 	public static void CleanUp() throws SQLException {
-		Customer objectToBeCleanUp = CustomerDao.findById(generatedIdCreateTest);
-		CustomerDao.delete(objectToBeCleanUp);
-		CustomerDao.delete(objectToUpdate);
+		Customer objectToBeCleanUp = customerDao.findById(generatedIdCreateTest);
+		customerDao.delete(objectToBeCleanUp);
+		customerDao.delete(objectToUpdate);
 	}
 }

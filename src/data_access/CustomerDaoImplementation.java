@@ -109,4 +109,10 @@ public class CustomerDaoImplementation implements CustomerDao{
 		return true;
 	}
 
+	@Override
+	public void setSalesOrderRelatedToThisCustomer(Customer customer) throws SQLException {
+		customer.setSaleOrders(DaoFactory.getSaleOrderDao().findByCustomer(customer));
+		
+	}
+
 }
