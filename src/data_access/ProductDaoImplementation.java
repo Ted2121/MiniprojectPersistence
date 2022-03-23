@@ -22,8 +22,8 @@ public class ProductDaoImplementation implements ProductDao {
 		preparedInsertProductStatementWithGeneratedKey.setDouble(3, objectToInsert.getSalePrice());
 		preparedInsertProductStatementWithGeneratedKey.setString(4, objectToInsert.getCountryOfOrigin());
 		preparedInsertProductStatementWithGeneratedKey.setInt(5, objectToInsert.getMinStock());
-		preparedInsertProductStatementWithGeneratedKey.setInt(6, 0); //Hardcoded value TODO use product.stock
-		preparedInsertProductStatementWithGeneratedKey.setInt(7, 1); //Hardcoded value TODO change it to the supplier id
+		preparedInsertProductStatementWithGeneratedKey.setInt(6, objectToInsert.getStock());
+		preparedInsertProductStatementWithGeneratedKey.setInt(7, objectToInsert.getFK_Supplier());
 		
 		preparedInsertProductStatementWithGeneratedKey.executeUpdate();
 		ResultSet tableContainingGenratedIds = preparedInsertProductStatementWithGeneratedKey.getGeneratedKeys();
@@ -44,7 +44,7 @@ public class ProductDaoImplementation implements ProductDao {
 		preparedUpdateProductStatement.setString(4, objectToUpdate.getCountryOfOrigin());
 		preparedUpdateProductStatement.setInt(5, objectToUpdate.getMinStock());
 		preparedUpdateProductStatement.setInt(6, objectToUpdate.getStock());
-		preparedUpdateProductStatement.setInt(7, 1); //Hardcoded value TODO change it to the supplier id
+		preparedUpdateProductStatement.setInt(7, objectToUpdate.getFK_Supplier());
 		preparedUpdateProductStatement.setInt(8, objectToUpdate.getId());
 		
 		preparedUpdateProductStatement.execute();

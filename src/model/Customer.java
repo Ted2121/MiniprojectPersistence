@@ -94,13 +94,9 @@ public class Customer {
 		this.type = type;
 	}
 
-
-
 	public List<SaleOrder> getSaleOrders() {
 		return saleOrders;
 	}
-
-
 
 	public void setSaleOrders(List<SaleOrder> saleOrders) {
 		this.saleOrders = saleOrders;

@@ -61,7 +61,6 @@ public class TestInvoiceDaoImplementation {
 	public void TestInvoiceUpdate() throws SQLException {
 		objectToUpdate.setAmount(12);
 		invoiceDao.update(objectToUpdate);
-		
 		assertTrue("Should display 12", invoiceDao.findByInvoiceNumber(objectToUpdate.getInvoiceNo()).getAmount() == 12);
 	}
 	

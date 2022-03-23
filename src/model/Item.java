@@ -7,29 +7,29 @@ public class Item extends Product{
 	private String description;
 	
 
-	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, String type, String description) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock);
+	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, String type, String description, int FK_Supplier) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, FK_Supplier);
 		this.type = type;
 		this.description = description;
 	}
 	
 	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-		 String type, String description) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock);
+		 String type, String description, int FK_Supplier) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, FK_Supplier);
 		this.type = type;
 		this.description = description;
 	}
 	
 	public Item(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-		 String type, String description, List<LineItem> saleOrderProductPair) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
+		 String type, String description, List<LineItem> saleOrderProductPair, int FK_Supplier) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair, FK_Supplier);
 		this.type = type;
 		this.description = description;
 	}
 	
 	public Item(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, String type, 
-			String description, List<LineItem> saleOrderProductPair) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
+			String description, List<LineItem> saleOrderProductPair, int FK_Supplier) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair, FK_Supplier);
 		this.type = type;
 		this.description = description;
 	}

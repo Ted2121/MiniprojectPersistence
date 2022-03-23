@@ -27,8 +27,8 @@ public class TestItemDaoImplementation {
 	
 	@BeforeClass
 	public static void CreatingTheTuppleToDelete () throws SQLException {
-		objectToDelete = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description"); 
-		objectToUpdate = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description"); 
+		objectToDelete = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description", 1); 
+		objectToUpdate = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description", 1); 
 		itemDao.create(objectToDelete);
 		itemDao.create(objectToUpdate);
 	}
@@ -54,7 +54,7 @@ public class TestItemDaoImplementation {
 	
 	@Test
 	public void TestItemInsert() throws SQLException {
-		Item testItem = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description"); 
+		Item testItem = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description", 1); 
 		generatedIdCreateTest = itemDao.create(testItem);
 		assertNotNull("The retrieved object shouldn't be null", itemDao.findById(generatedIdCreateTest));
 	}

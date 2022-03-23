@@ -10,29 +10,29 @@ public class Clothing extends Product{
 
 
 	public Clothing(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			int stock, String size, String color) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock);
+			int stock, String size, String color, int FK_Supplier) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, FK_Supplier);
 		this.size = size;
 		this.color = color;
 	}
 	
 	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			int stock, String size, String color) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock);
+			int stock, String size, String color, int FK_Supplier) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, FK_Supplier);
 		this.size = size;
 		this.color = color;
 	}
 	
 	public Clothing(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			int stock, String size, String color, List<LineItem> saleOrderProductPair) {
-		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
+			int stock, String size, String color, List<LineItem> saleOrderProductPair, int FK_Supplier) {
+		super(name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair, FK_Supplier);
 		this.size = size;
 		this.color = color;
 	}
 	
 	public Clothing(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock,
-			int stock, String size, String color, List<LineItem> saleOrderProductPair) {
-		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair);
+			int stock, String size, String color, List<LineItem> saleOrderProductPair, int FK_Supplier) {
+		super(id, name, purchasePrice, salePrice, countryOfOrigin, minStock, stock, saleOrderProductPair, FK_Supplier);
 		this.size = size;
 		this.color = color;
 	}

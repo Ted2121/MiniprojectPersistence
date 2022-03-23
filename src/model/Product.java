@@ -15,9 +15,9 @@ public abstract class Product {
 	private int FK_Supplier;
 	private int stock;
 	
-	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock) {
+	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, int FK_Supplier) {
 		
-	
+		this.FK_Supplier = FK_Supplier;
 		this.stock = stock;
 		this.name = name;
 		this.purchasePrice = purchasePrice;
@@ -27,8 +27,9 @@ public abstract class Product {
 	}
 
 	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			List<LineItem> lineItem) {
+			List<LineItem> lineItem, int FK_Supplier) {
 		
+		this.FK_Supplier = FK_Supplier;
 		this.name = name;
 		this.purchasePrice = purchasePrice;
 		this.salePrice = salePrice;
@@ -37,8 +38,9 @@ public abstract class Product {
 		this.lineItem = lineItem;
 	}
 	
-	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock) {
+	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock, int FK_Supplier) {
 		
+		this.FK_Supplier = FK_Supplier;
 		this.id = id;
 		this.name = name;
 		this.purchasePrice = purchasePrice;
@@ -49,8 +51,8 @@ public abstract class Product {
 	
 	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			List<LineItem> lineItem) {
-		
+			List<LineItem> lineItem, int FK_Supplier) {
+		this.FK_Supplier = FK_Supplier;
 		this.id = id;
 		this.name = name;
 		this.purchasePrice = purchasePrice;
@@ -86,8 +88,6 @@ public abstract class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
-
 
 	public int getId() {
 		return id;

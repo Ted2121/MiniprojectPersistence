@@ -25,7 +25,7 @@ public class ItemDaoImplementation implements ItemDao{
 	
 	private Item buildObject(ResultSet rs) throws SQLException{
 		Item buildedObject = new Item(rs.getInt("id"),rs.getString("name"), rs.getDouble("purchasePrice"), rs.getDouble("salesPrice"),
-				rs.getString("countryOfOrigin"), rs.getInt("minStock"), rs.getInt("stock"), rs.getString("type"), rs.getString("description"));
+				rs.getString("countryOfOrigin"), rs.getInt("minStock"), rs.getInt("stock"), rs.getString("type"), rs.getString("description"), rs.getInt("FK_Supplier"));
 		buildedObject.setFK_Supplier(rs.getInt("FK_Supplier"));
 		return buildedObject;
 	}

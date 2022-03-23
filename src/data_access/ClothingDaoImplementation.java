@@ -26,7 +26,7 @@ public class ClothingDaoImplementation implements ClothingDao{
 	private Clothing buildObject(ResultSet rs) throws SQLException{
 		
 		Clothing buildedObject = new Clothing(rs.getInt("id"),rs.getString("name"), rs.getDouble("purchasePrice"), rs.getDouble("salesPrice"),
-				rs.getString("countryOfOrigin"), rs.getInt("minStock"), rs.getInt("stock"), rs.getString("size"), rs.getString("color"));
+				rs.getString("countryOfOrigin"), rs.getInt("minStock"), rs.getInt("stock"), rs.getString("size"), rs.getString("color"), rs.getInt("FK_Supplier"));
 		buildedObject.setFK_Supplier(rs.getInt("FK_Supplier"));
 		return buildedObject;
 	}
