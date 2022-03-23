@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SaleOrder {
 	
@@ -13,12 +14,11 @@ public class SaleOrder {
 	private Customer customer;
 	private Invoice invoice;
 	private int amount;
-	private SaleOrder_Product saleOrderProductPair;
+	private List<SaleOrder_Product> saleOrderProductPair;
+	private int FK_Invoice;
+	private int FK_Customer;
 	
-
-	
-	
-	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
+		public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
 			Invoice invoice) {
 	
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
@@ -54,7 +54,7 @@ public class SaleOrder {
 
 
 	public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
-			Invoice invoice, SaleOrder_Product saleOrderProductPair) {
+			Invoice invoice, List<SaleOrder_Product> saleOrderProductPair) {
 		
 		this.id = id;
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
@@ -66,7 +66,7 @@ public class SaleOrder {
 	}
 
 
-	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice, SaleOrder_Product saleOrderProductPair) {
+	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice, List<SaleOrder_Product> saleOrderProductPair) {
 		
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
@@ -88,11 +88,11 @@ public class SaleOrder {
 	}
 
 
-	public SaleOrder_Product getSaleOrderProductPair() {
+	public List<SaleOrder_Product> getSaleOrderProductPair() {
 		return saleOrderProductPair;
 	}
 
-	public void setSaleOrderProductPair(SaleOrder_Product saleOrderProductPair) {
+	public void setSaleOrderProductPair(List<SaleOrder_Product> saleOrderProductPair) {
 		this.saleOrderProductPair = saleOrderProductPair;
 	}
 
@@ -157,7 +157,21 @@ public class SaleOrder {
 		this.invoice = invoice;
 	}
 
+	public int getFK_Invoice() {
+		return FK_Invoice;
+	}
 
+	public void setFK_Invoice(int fK_Invoice) {
+		FK_Invoice = fK_Invoice;
+	}
+	
+	public int getFK_Customer() {
+		return FK_Customer;
+	}
+	
+	public void setFK_Customer(int fK_Customer) {
+		FK_Customer = fK_Customer;
+	}
     
     
 }
