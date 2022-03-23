@@ -1,13 +1,13 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.Random;
 
 public class Invoice {
 	private int id;
 	private String invoiceNo;
 	private String paymentDate;
 	private double amount;
+	private SaleOrder saleOrder;
 	
 	public Invoice(int id, String invoiceNo, String paymentDate, double amount) {
 		
@@ -54,6 +54,14 @@ public class Invoice {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+
+	public SaleOrder getSaleOrder() {
+		return saleOrder;
+	}
+
+	public void setSaleOrder(SaleOrder saleOrder) {
+		this.saleOrder = saleOrder;
 	}
 
 	
