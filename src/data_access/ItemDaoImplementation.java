@@ -9,8 +9,6 @@ import java.util.List;
 
 import data_access.interfaces.ItemDao;
 import model.Item;
-import model.Item;
-import model.Item;
 
 public class ItemDaoImplementation implements ItemDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -28,6 +26,7 @@ public class ItemDaoImplementation implements ItemDao{
 	private Item buildObject(ResultSet rs) throws SQLException{
 		Item buildedObject = new Item(rs.getInt("id"),rs.getString("name"), rs.getDouble("purchasePrice"), rs.getDouble("salesPrice"),
 				rs.getString("countryOfOrigin"), rs.getInt("minStock"), rs.getInt("stock"), rs.getString("type"), rs.getString("description"));
+		buildedObject.setFK_Supplier(rs.getInt("FK_Supplier"));
 		return buildedObject;
 	}
 
@@ -98,7 +97,6 @@ public class ItemDaoImplementation implements ItemDao{
 		preparedUpdateItemStatement.setInt(3, objectToUpdate.getId());
 
 		preparedUpdateItemStatement.execute();
-		
 		return true;
 	}
 
@@ -110,8 +108,19 @@ public class ItemDaoImplementation implements ItemDao{
 		PreparedStatement preparedDeleteItemStatement = connectionDB.prepareStatement(sqlDeleteItemStatement);
 		preparedDeleteItemStatement.setInt(1, objectToDelete.getId());
 		preparedDeleteItemStatement.execute();
-		
 		return true;
+	}
+
+	@Override
+	public void setSupplierRelatedToThisItem(Item item) throws SQLException {
+		DaoFactory.getProductDao().setSupplierRelatedToThisProduct(item);
+		
+	}
+
+	@Override
+	public void setSaleOrder_ProductRelatedToThisItem(Item item) throws SQLException {
+		DaoFactory.getProductDao().setSaleOrder_ProductRelatedToThisProduct(item);
+		
 	}
 
 }
