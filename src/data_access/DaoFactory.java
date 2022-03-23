@@ -10,6 +10,7 @@ public class DaoFactory {
 	private static ProductDaoImplementation productDao;
 	private static SaleOrderDaoImplementation saleOrderDao;
 	private static SupplierDaoImplementation supplierDao;
+	private static SaleOrder_ProductDaoImplementation saleOrder_ProductDao;
 	
 	private DaoFactory(){}
 	
@@ -60,6 +61,13 @@ public class DaoFactory {
 			supplierDao = new SupplierDaoImplementation();
 		}
 		return supplierDao;
+	}
+	
+	public static SaleOrder_ProductDaoImplementation getSaleOrder_ProductDao() {
+		if(saleOrder_ProductDao == null) {
+			saleOrder_ProductDao = new SaleOrder_ProductDaoImplementation();
+		}
+		return saleOrder_ProductDao;
 	}
 	
 	
