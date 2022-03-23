@@ -27,14 +27,18 @@ public class TestSaleOrderDaoImplementation {
 	static SaleOrder objectToDelete;
 	static SaleOrder objectToUpdate;
 	static Customer customer;
+	static Customer customer2;
 	static Invoice invoice;
+	static Invoice invoice2;
 	
 	@BeforeClass
 	public static void CreatingTheTuppleToDelete () throws SQLException {
 		customer = DaoFactory.getCustomerDao().findAll().get(1);
-		invoice = DaoFactory.getInvoiceDao().findAll().get(0);
+		customer2 = DaoFactory.getCustomerDao().findAll().get(2);
+		invoice = DaoFactory.getInvoiceDao().findById(5);
+		invoice2 = DaoFactory.getInvoiceDao().findById(6);
 		objectToDelete = new SaleOrder("2022-02-01 00:00:00:000", "2022-02-06 00:00:00:000", false, customer, invoice); 
-		objectToUpdate = new SaleOrder("2022-02-01 00:00:00:000", "2022-02-06 00:00:00:000", false, customer, invoice); 
+		objectToUpdate = new SaleOrder("2022-02-01 00:00:00:000", "2022-02-06 00:00:00:000", false, customer2, invoice2); 
 		SaleOrderDao.create(objectToDelete);
 		SaleOrderDao.create(objectToUpdate);
 	}
@@ -50,6 +54,12 @@ public class TestSaleOrderDaoImplementation {
 	public void TestSaleOrderFindByCustomer() throws SQLException {
 		List<SaleOrder> result = SaleOrderDao.findByCustomer(customer);
 		assertFalse("The retrieved list shouldn't be empty", result.isEmpty());
+	}
+	
+	@Test
+	public void TestSaleOrderFindByInvoice() throws SQLException {
+		SaleOrder result = SaleOrderDao.findByInvoice(invoice);
+		assertNotNull("The retrieved list shouldn't be empty", result);
 	}
 	
 	@Test

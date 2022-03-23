@@ -5,11 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import data_access.interfaces.SaleOrderDao;
 import model.Customer;
+import model.Invoice;
 import model.SaleOrder;
 
 public class SaleOrderDaoImplementation implements SaleOrderDao{
@@ -68,8 +70,19 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 		preparedInsertSaleOrderStatementWithGeneratedKey.setDouble(2, objectToInsert.getAmount());
 		preparedInsertSaleOrderStatementWithGeneratedKey.setString(3, objectToInsert.getDeliveryDate());
 		preparedInsertSaleOrderStatementWithGeneratedKey.setBoolean(4, objectToInsert.isDeliveryStatus());
-		preparedInsertSaleOrderStatementWithGeneratedKey.setInt(5, 1); //Hardcoded value TODO Change it with a Invoice ID
-		preparedInsertSaleOrderStatementWithGeneratedKey.setInt(6, 1); //Hardcoded value TODO Change it with a customer ID
+		if(objectToInsert.getFK_Invoice() != 0) {
+			DaoFactory.getSaleOrderDao().setInvoiceRelatedToThisSaleOrder(objectToInsert);
+			preparedInsertSaleOrderStatementWithGeneratedKey.setInt(5, objectToInsert.getInvoice().getId());
+		}else {
+			preparedInsertSaleOrderStatementWithGeneratedKey.setNull(5, Types.INTEGER);
+		}
+		
+		if(objectToInsert.getFK_Customer() != 0) {
+			DaoFactory.getSaleOrderDao().setCustomerRelatedToThisSaleOrder(objectToInsert);
+			preparedInsertSaleOrderStatementWithGeneratedKey.setInt(6, objectToInsert.getCustomer().getId());
+		}else {
+			preparedInsertSaleOrderStatementWithGeneratedKey.setNull(6, Types.INTEGER);
+		}
 		
 		preparedInsertSaleOrderStatementWithGeneratedKey.executeUpdate();
 		
@@ -122,6 +135,21 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 		ResultSet rs = preparedSelectStatement.executeQuery();
 		List<SaleOrder> retrievedSaleOrderList = buildObjects(rs);
 
+		return retrievedSaleOrderList;
+	}
+	
+	@Override
+	public SaleOrder findByInvoice(Invoice invoice) throws SQLException{
+		String query = "SELECT * FROM SaleOrder WHERE FK_Invoice = ?";
+		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
+		preparedSelectStatement.setLong(1, invoice.getId());
+		
+		ResultSet rs = preparedSelectStatement.executeQuery();
+		SaleOrder retrievedSaleOrderList = null;
+		while(rs.next()) {
+			retrievedSaleOrderList = buildObject(rs);
+		}
+		
 		return retrievedSaleOrderList;
 	}
 

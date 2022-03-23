@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Customer;
+import model.Invoice;
 import model.SaleOrder;
 
 public interface SaleOrderDao {
@@ -16,4 +17,5 @@ public interface SaleOrderDao {
 	boolean setInvoiceRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
 	boolean setCustomerRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
 	boolean setSaleOrder_ProductRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException;
+	SaleOrder findByInvoice(Invoice invoice) throws SQLException;
 }
