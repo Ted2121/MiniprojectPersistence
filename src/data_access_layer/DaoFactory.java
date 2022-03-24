@@ -1,7 +1,7 @@
 package data_access_layer;
 
 
-public class DaoFactory {
+public class DaoFactory{
 	private static ClothingDaoImplementation clothingDao;
 	private static CustomerDaoImplementation customerDao;
 	private static InvoiceDaoImplementation invoiceDao;

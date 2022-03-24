@@ -45,6 +45,20 @@ public class CustomerDaoImplementation implements CustomerDao{
 		
 		return retrievedCustomer;
 	}
+	
+	@Override
+	public Customer findCustomerByName(String customerName) throws SQLException{
+		String query = "SELECT * FROM Customer WHERE [name] = ?";
+		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
+		preparedSelectStatement.setString(1, customerName);
+		ResultSet rs = preparedSelectStatement.executeQuery();	
+		Customer retrievedCustomer = null;
+		while(rs.next()) {
+			retrievedCustomer = buildObject(rs);
+		}
+		
+		return retrievedCustomer;
+	}
 
 	@Override
 	public ArrayList<Customer> findAllCustomers() throws SQLException {
@@ -114,5 +128,7 @@ public class CustomerDaoImplementation implements CustomerDao{
 		customer.setSaleOrders(DaoFactory.getSaleOrderDao().findSaleOrdersByCustomer(customer));
 		
 	}
+
+	
 
 }

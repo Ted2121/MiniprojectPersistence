@@ -2,8 +2,6 @@ package ui;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
-
 public class GUIMain {
 	private JFrame frame;
 	
@@ -17,7 +15,7 @@ public class GUIMain {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Sales Software");
 		frame.setLayout(new BorderLayout());
-		
+	
 		JPanel pageChooser = new JPanel();
 		frame.add(pageChooser,BorderLayout.NORTH);
 		pageChooser.setPreferredSize(new Dimension(800,40));

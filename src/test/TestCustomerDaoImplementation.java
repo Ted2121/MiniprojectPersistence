@@ -47,6 +47,11 @@ public class TestCustomerDaoImplementation {
 	}
 	
 	@Test
+	public void TestCustomerFindByName() throws SQLException {
+		assertNotNull("The retrieved object shouldn't be null", customerDao.findCustomerByName("Vicent Delavigne"));
+	}
+	
+	@Test
 	public void TestCustomerInsert() throws SQLException {
 		Customer testCustomer = new Customer("testCustomer", "place", "aCity", 9000, "phoneNumber", "club"); 
 		generatedIdCreateTest = customerDao.createCustomer(testCustomer);

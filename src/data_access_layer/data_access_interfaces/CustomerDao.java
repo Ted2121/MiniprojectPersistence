@@ -13,4 +13,5 @@ public interface CustomerDao {
 	boolean updateCustomer(Customer objectToUpdate) throws SQLException;
 	boolean deleteCustomer(Customer objectToDelete) throws SQLException;
 	void setSalesOrderRelatedToThisCustomer(Customer customer) throws SQLException;
+	Customer findCustomerByName(String customerName) throws SQLException;
 }
