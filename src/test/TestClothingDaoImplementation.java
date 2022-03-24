@@ -56,6 +56,13 @@ public class TestClothingDaoImplementation {
 		assertFalse("The retrieved object shouldn't be empty", result.isEmpty());
 	}
 	
+//	TODO resolve the statement problem with wildcard and setString
+//	@Test
+//	public void TestClothingFindByName() throws SQLException {
+//		ArrayList<Clothing> result = clothingDao.findClothingsByClothingName("t");
+//		assertFalse("The retrieved object shouldn't be empty", result.isEmpty());
+//	}
+	
 	@Test
 	public void TestClothingInsert() throws SQLException {
 		Clothing testClothing = new Clothing("testClothing",10.02,12.56,"Poland",10, 12,"M","red", 3); 

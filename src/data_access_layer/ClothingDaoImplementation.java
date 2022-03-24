@@ -70,6 +70,18 @@ public class ClothingDaoImplementation implements ClothingDao{
 		
 		return clothingList;
 	}
+	
+//	TODO resolve the statement problem with wildcard and setString
+//	@Override
+//	public ArrayList<Clothing> findClothingsByClothingName(String name) throws SQLException {
+//		String query = "SELECT * FROM Clothing INNER JOIN Product ON Clothing.id = Product.id WHERE Product.name LIKE ?";
+//		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
+//		preparedSelectStatement.setString(1, "!'%" + name + "%!'");
+//		ResultSet rs = preparedSelectStatement.executeQuery();
+//
+//		return buildObjects(rs);
+//		
+//	}
 
 	@Override
 	public int createClothing(Clothing objectToInsert) throws SQLException {

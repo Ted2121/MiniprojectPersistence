@@ -12,6 +12,7 @@ public interface ClothingDao {
 	Clothing findClothingById(int id) throws SQLException;
 	ArrayList<Clothing> findAllClothings() throws SQLException;
 	ArrayList<Clothing> findClothingsBySupplier (Supplier supplier) throws SQLException;
+//	ArrayList<Clothing> findClothingsByClothingName(String name) throws SQLException; TODO resolve the statement problem with wildcard and setString
 	int createClothing(Clothing objectToInsert) throws SQLException;
 	boolean updateClothing(Clothing objectToUpdate) throws SQLException;
 	boolean deleteClothing(Clothing objectToDelete) throws SQLException;
