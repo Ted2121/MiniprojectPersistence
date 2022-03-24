@@ -28,7 +28,7 @@ public class TestLineItemDaoImplementation {
 	static LineItem objectToUpdate;
 	
 	@BeforeClass
-	public static void CreatingTheTuppleToDelete () throws SQLException {
+	public static void CreatingTheTupleToDelete () throws SQLException {
 		Product product = DaoFactory.getClothingDao().findClothingById(1); 
 		SaleOrder saleOrder = DaoFactory.getSaleOrderDao().findSaleOrderById(3);
 		Product product2 = DaoFactory.getClothingDao().findClothingById(2);

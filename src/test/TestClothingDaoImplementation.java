@@ -28,7 +28,7 @@ public class TestClothingDaoImplementation {
 	static Clothing objectToUpdate;
 	
 	@BeforeClass
-	public static void CreatingTheTuppleToDelete () throws SQLException {
+	public static void CreatingTheTupleToDelete () throws SQLException {
 		objectToDelete = new Clothing("testClothing",10.02,12.56,"Poland",10, 12,"M","red", 1); 
 		objectToUpdate = new Clothing("testClothing",10.02,12.56,"Poland",10, 12,"M","red", 2); 
 		clothingDao.createClothing(objectToDelete);

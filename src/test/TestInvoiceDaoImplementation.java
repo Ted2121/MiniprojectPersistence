@@ -24,7 +24,7 @@ public class TestInvoiceDaoImplementation {
 	static Invoice objectToUpdate;
 	
 	@BeforeClass
-	public static void CreatingTheTuppleToDelete () throws SQLException {
+	public static void CreatingTheTupleToDelete () throws SQLException {
 		objectToDelete = new Invoice("invoiceNumber", "2022-03-22 00:00:00:000", 100.00); 
 		objectToUpdate = new Invoice("invoiceNumber2", "2022-03-22 00:00:00:000", 100.00); 
 		invoiceDao.createInvoice(objectToDelete);

@@ -29,7 +29,7 @@ public class TestItemDaoImplementation {
 	static Item objectToUpdate;
 	
 	@BeforeClass
-	public static void CreatingTheTuppleToDelete () throws SQLException {
+	public static void CreatingTheTupleToDelete () throws SQLException {
 		objectToDelete = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description", 1); 
 		objectToUpdate = new Item("testItem",10.02,12.56,"Poland",10, 12,"type","description", 1); 
 		itemDao.createItem(objectToDelete);

@@ -31,7 +31,7 @@ public class TestSupplierDaoImplementation {
 	static Invoice invoice;
 	
 	@BeforeClass
-	public static void CreatingTheTuppleToDelete () throws SQLException {
+	public static void CreatingTheTupleToDelete () throws SQLException {
 		objectToDelete = new Supplier("Mark", "place", "country", "phone number", "email@email.dk"); 
 		objectToUpdate = new Supplier("Mark", "place", "country", "phone number", "email@email.dk"); 
 		supplierDao.createSupplier(objectToDelete);

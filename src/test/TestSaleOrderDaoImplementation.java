@@ -31,7 +31,7 @@ public class TestSaleOrderDaoImplementation {
 	static Invoice invoice2;
 	
 	@BeforeClass
-	public static void CreatingTheTuppleToDelete () throws SQLException {
+	public static void CreatingTheTupleToDelete () throws SQLException {
 		customer = DaoFactory.getCustomerDao().findAllCustomers().get(1);
 		customer2 = DaoFactory.getCustomerDao().findAllCustomers().get(2);
 		invoice = DaoFactory.getInvoiceDao().findInvoiceByInvoiceNumber("47-TPH-5629");
