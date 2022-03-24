@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -17,6 +18,7 @@ import data_access_layer.ClothingDaoImplementation;
 import data_access_layer.DaoFactory;
 import data_access_layer.DatabaseConnection;
 import model.Clothing;
+import model.Supplier;
 
 public class TestClothingDaoImplementation {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -44,6 +46,14 @@ public class TestClothingDaoImplementation {
 	public void TestClothingFindAll() throws SQLException {
 		List<Clothing> result = clothingDao.findAllClothings();
 		assertFalse("The retrieved ArrayList shouldn't be empty", result.isEmpty());
+	}
+	
+	@Test
+	public void TestClothingFindBySupplier() throws SQLException {
+		Supplier supplier = new Supplier("ttt", "ttt", "ttt", "ttt", "ttt");
+		supplier.setId(1);
+		ArrayList<Clothing> result = clothingDao.findClothingsBySupplier(supplier);
+		assertFalse("The retrieved object shouldn't be empty", result.isEmpty());
 	}
 	
 	@Test

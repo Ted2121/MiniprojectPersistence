@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data_access_layer.data_access_interfaces.SupplierDao;
+import model.Product;
 import model.Supplier;
 
 public class SupplierDaoImplementation implements SupplierDao{
@@ -105,6 +106,15 @@ public class SupplierDaoImplementation implements SupplierDao{
 		preparedDeleteSupplierStatement.setInt(1, objectToDelete.getId());
 		preparedDeleteSupplierStatement.execute();
 		
+		return true;
+	}
+
+	@Override
+	public boolean setProductsRelatedToThisSupplier(Supplier supplier) throws SQLException {
+		ArrayList<Product> productsLinkedToTheSupplier = new ArrayList<Product>();
+		productsLinkedToTheSupplier.addAll(DaoFactory.getItemDao().findItemsBySupplier(supplier));
+		productsLinkedToTheSupplier.addAll(DaoFactory.getClothingDao().findClothingsBySupplier(supplier));
+		supplier.setProducts(productsLinkedToTheSupplier);
 		return true;
 	}
 }

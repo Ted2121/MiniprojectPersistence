@@ -1,8 +1,10 @@
 package data_access_layer.data_access_interfaces;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Product;
+import model.Supplier;
 
 public interface ProductDao {
 	int createProduct(Product objectToInsert) throws SQLException;

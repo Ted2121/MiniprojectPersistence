@@ -9,6 +9,8 @@ import java.util.List;
 
 import data_access_layer.data_access_interfaces.ClothingDao;
 import model.Clothing;
+import model.Item;
+import model.Supplier;
 
 public class ClothingDaoImplementation implements ClothingDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -25,10 +27,10 @@ public class ClothingDaoImplementation implements ClothingDao{
 	
 	private Clothing buildObject(ResultSet rs) throws SQLException{
 		
-		Clothing buildedObject = new Clothing(rs.getInt("id"),rs.getString("name"), rs.getDouble("purchasePrice"), rs.getDouble("salesPrice"),
+		Clothing builtObject = new Clothing(rs.getInt("id"),rs.getString("name"), rs.getDouble("purchasePrice"), rs.getDouble("salesPrice"),
 				rs.getString("countryOfOrigin"), rs.getInt("minStock"), rs.getInt("stock"), rs.getString("size"), rs.getString("color"), rs.getInt("FK_Supplier"));
-		buildedObject.setFK_Supplier(rs.getInt("FK_Supplier"));
-		return buildedObject;
+		builtObject.setFK_Supplier(rs.getInt("FK_Supplier"));
+		return builtObject;
 	}
 
 	@Override
@@ -53,6 +55,20 @@ public class ClothingDaoImplementation implements ClothingDao{
 		ArrayList<Clothing> retrievedClothingList = buildObjects(rs);
 
 		return retrievedClothingList;
+	}
+	
+	@Override
+	public ArrayList<Clothing> findClothingsBySupplier(Supplier supplier) throws SQLException {
+		String query = "SELECT * FROM Clothing INNER JOIN Product ON Clothing.id = Product.id WHERE Product.FK_Supplier = ?";
+		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
+		preparedSelectStatement.setInt(1, supplier.getId());
+		ResultSet rs = preparedSelectStatement.executeQuery();
+		ArrayList<Clothing> clothingList = new ArrayList<Clothing>();
+		while(rs.next()) {
+			clothingList.add(buildObject(rs));
+		}
+		
+		return clothingList;
 	}
 
 	@Override

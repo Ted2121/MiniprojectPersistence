@@ -9,6 +9,7 @@ import java.util.List;
 
 import data_access_layer.data_access_interfaces.ItemDao;
 import model.Item;
+import model.Supplier;
 
 public class ItemDaoImplementation implements ItemDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -59,6 +60,20 @@ public class ItemDaoImplementation implements ItemDao{
 		String query = "SELECT * FROM Item INNER JOIN Product ON Item.id = Product.id WHERE Item.type = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setString(1, type);
+		ResultSet rs = preparedSelectStatement.executeQuery();
+		ArrayList<Item> itemList = new ArrayList<Item>();
+		while(rs.next()) {
+			itemList.add(buildObject(rs));
+		}
+		
+		return itemList;
+	}
+	
+	@Override
+	public ArrayList<Item> findItemsBySupplier(Supplier supplier) throws SQLException {
+		String query = "SELECT * FROM Item INNER JOIN Product ON Item.id = Product.id WHERE Product.FK_Supplier = ?";
+		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
+		preparedSelectStatement.setInt(1, supplier.getId());
 		ResultSet rs = preparedSelectStatement.executeQuery();
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		while(rs.next()) {

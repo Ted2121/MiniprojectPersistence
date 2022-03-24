@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import data_access_layer.data_access_interfaces.ProductDao;
+import model.Item;
 import model.Product;
+import model.Supplier;
 
 public class ProductDaoImplementation implements ProductDao {
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
@@ -69,5 +72,6 @@ public class ProductDaoImplementation implements ProductDao {
 	public void setLineItemRelatedToThisProduct(Product product) throws SQLException {
 		product.setLineItem(DaoFactory.getLineItemDao().findLineItemsByProduct(product));
 	}
+
 
 }

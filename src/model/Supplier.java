@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Supplier {
 
 	private int id;
@@ -8,6 +10,7 @@ public class Supplier {
 	private String country;
 	private String phoneNo;
 	private String email;
+	private ArrayList<Product> products;
 
 	public Supplier(int id, String name, String address, String country, String phoneNo, String email) {
 
@@ -74,6 +77,14 @@ public class Supplier {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
 	}
 
 

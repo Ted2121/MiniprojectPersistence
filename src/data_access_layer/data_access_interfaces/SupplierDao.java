@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.SaleOrder;
 import model.Supplier;
 
 public interface SupplierDao {
@@ -12,4 +13,5 @@ public interface SupplierDao {
 	int createSupplier(Supplier objectToInsert) throws SQLException;
 	boolean updateSupplier(Supplier objectToUpdate) throws SQLException;
 	boolean deleteSupplier(Supplier objectToDelete) throws SQLException;
+	boolean setProductsRelatedToThisSupplier(Supplier supplier) throws SQLException;
 }

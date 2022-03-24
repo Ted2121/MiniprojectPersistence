@@ -18,6 +18,7 @@ import data_access_layer.DatabaseConnection;
 import data_access_layer.SupplierDaoImplementation;
 import model.Customer;
 import model.Invoice;
+import model.SaleOrder;
 import model.Supplier;
 
 public class TestSupplierDaoImplementation {
@@ -69,6 +70,13 @@ public class TestSupplierDaoImplementation {
 		supplierDao.updateSupplier(objectToUpdate);
 		
 		assertEquals("Should display UpdatedName", "UpdatedName", supplierDao.findSupplierById(objectToUpdate.getId()).getName());
+	}
+	
+	@Test
+	public void TestSupplierSetProducts() throws SQLException {
+		Supplier result = supplierDao.findSupplierById(3);
+		supplierDao.setProductsRelatedToThisSupplier(result);
+		assertNotNull("The retrieved invoice shouldn't be null", result.getProducts());
 	}
 	
 	@AfterClass
