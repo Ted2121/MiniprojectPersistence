@@ -12,9 +12,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import data_access.InvoiceDaoImplementation;
-import data_access.DaoFactory;
-import data_access.DatabaseConnection;
+import data_access_layer.DaoFactory;
+import data_access_layer.DatabaseConnection;
+import data_access_layer.InvoiceDaoImplementation;
 import model.Invoice;
 
 public class TestInvoiceDaoImplementation {
@@ -27,54 +27,54 @@ public class TestInvoiceDaoImplementation {
 	public static void CreatingTheTuppleToDelete () throws SQLException {
 		objectToDelete = new Invoice("invoiceNumber", "2022-03-22 00:00:00:000", 100.00); 
 		objectToUpdate = new Invoice("invoiceNumber2", "2022-03-22 00:00:00:000", 100.00); 
-		invoiceDao.create(objectToDelete);
-		invoiceDao.create(objectToUpdate);
+		invoiceDao.createInvoice(objectToDelete);
+		invoiceDao.createInvoice(objectToUpdate);
 	}
 	
 	
 	@Test
 	public void TestInvoiceFindById() throws SQLException {
-		Invoice result = invoiceDao.findByInvoiceNumber("18-QUT-0001");
+		Invoice result = invoiceDao.findInvoiceByInvoiceNumber("18-QUT-0001");
 		assertNotNull("The retrieved object shouldn't be null", result);
 	}
 	
 	@Test
 	public void TestInvoiceFindAll() throws SQLException {
-		List<Invoice> result = invoiceDao.findAll();
-		assertFalse("The retrieved list shouldn't be empty", result.isEmpty());
+		List<Invoice> result = invoiceDao.findAllInvoices();
+		assertFalse("The retrievedArrayList shouldn't be empty", result.isEmpty());
 	}
 	
 	@Test
 	public void TestInvoiceInsert() throws SQLException {
 		Invoice testInvoice = new Invoice("testInvoice","2022-03-22 00:00:00:000", 100.00); 
-		invoiceDao.create(testInvoice);
-		assertNotNull("The retrieved object shouldn't be null", invoiceDao.findByInvoiceNumber(testInvoice.getInvoiceNo()));
+		invoiceDao.createInvoice(testInvoice);
+		assertNotNull("The retrieved object shouldn't be null", invoiceDao.findInvoiceByInvoiceNumber(testInvoice.getInvoiceNo()));
 	}
 	
 	@Test
 	public void TestInvoiceDelete() throws SQLException {
-		boolean isSucceeded = invoiceDao.delete(objectToDelete);
+		boolean isSucceeded = invoiceDao.deleteInvoice(objectToDelete);
 		assertTrue("Should have deletes the object ", isSucceeded);
 	}
 	
 	@Test
 	public void TestInvoiceUpdate() throws SQLException {
 		objectToUpdate.setAmount(12);
-		invoiceDao.update(objectToUpdate);
-		assertTrue("Should display 12", invoiceDao.findByInvoiceNumber(objectToUpdate.getInvoiceNo()).getAmount() == 12);
+		invoiceDao.updateInvoice(objectToUpdate);
+		assertTrue("Should display 12", invoiceDao.findInvoiceByInvoiceNumber(objectToUpdate.getInvoiceNo()).getAmount() == 12);
 	}
 	
 	@Test
 	public void TestInvoiceSetSaleOrder() throws SQLException {
-		Invoice result = invoiceDao.findByInvoiceNumber("18-QUT-0001");
+		Invoice result = invoiceDao.findInvoiceByInvoiceNumber("18-QUT-0001");
 		invoiceDao.setSalesOrderRelatedToThisInvoice(result);
 		assertNotNull("The retrieved invoice shouldn't be null", result.getSaleOrder());
 	}
 	
 	@AfterClass
 	public static void CleanUp() throws SQLException {
-		Invoice objectToBeCleanUp = invoiceDao.findByInvoiceNumber("testInvoice");
-		invoiceDao.delete(objectToBeCleanUp);
-		invoiceDao.delete(objectToUpdate);
+		Invoice objectToBeCleanUp = invoiceDao.findInvoiceByInvoiceNumber("testInvoice");
+		invoiceDao.deleteInvoice(objectToBeCleanUp);
+		invoiceDao.deleteInvoice(objectToUpdate);
 	}
 }

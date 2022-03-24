@@ -1,4 +1,4 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import data_access.interfaces.CustomerDao;
+import data_access_layer.data_access_interfaces.CustomerDao;
 import model.Customer;
 
 public class CustomerDaoImplementation implements CustomerDao{
@@ -16,8 +16,8 @@ public class CustomerDaoImplementation implements CustomerDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
 	ProductDaoImplementation productDao = DaoFactory.getProductDao();
 	
-	private List<Customer> buildObjects(ResultSet rs) throws SQLException{
-		List<Customer> customerList = new ArrayList<Customer>();
+	private ArrayList<Customer> buildObjects(ResultSet rs) throws SQLException{
+		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		while(rs.next()) {
 			customerList.add(buildObject(rs));
 		}
@@ -33,7 +33,7 @@ public class CustomerDaoImplementation implements CustomerDao{
 	}
 
 	@Override
-	public Customer findById(int id) throws SQLException {
+	public Customer findCustomerById(int id) throws SQLException {
 		String query = "SELECT * FROM Customer WHERE id = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, id);
@@ -47,17 +47,17 @@ public class CustomerDaoImplementation implements CustomerDao{
 	}
 
 	@Override
-	public List<Customer> findAll() throws SQLException {
+	public ArrayList<Customer> findAllCustomers() throws SQLException {
 		String query = "SELECT * FROM Customer";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<Customer> retrievedClothingList = buildObjects(rs);
+		ArrayList<Customer> retrievedClothingList = buildObjects(rs);
 
 		return retrievedClothingList;
 	}
 
 	@Override
-	public int create(Customer objectToInsert) throws SQLException {
+	public int createCustomer(Customer objectToInsert) throws SQLException {
 		
 		String sqlInsertCustomerStatement = "INSERT INTO Customer([name], [address], city, zipcode, phoneno, [type])"
 				+ "VALUES(?, ?, ?, ?, ?, ?);";
@@ -81,7 +81,7 @@ public class CustomerDaoImplementation implements CustomerDao{
 	}
 
 	@Override
-	public boolean update(Customer objectToUpdate) throws SQLException {
+	public boolean updateCustomer(Customer objectToUpdate) throws SQLException {
 		
 		String sqlUpdateCustomerStatement = "UPDATE Customer SET [name]= ?, [address]= ?, city= ?, zipcode= ?, phoneno= ?, [type]= ? WHERE id = ?";
 		PreparedStatement preparedUpdateCustomerStatement = connectionDB.prepareStatement(sqlUpdateCustomerStatement);
@@ -99,7 +99,7 @@ public class CustomerDaoImplementation implements CustomerDao{
 	}
 
 	@Override
-	public boolean delete(Customer objectToDelete) throws SQLException {
+	public boolean deleteCustomer(Customer objectToDelete) throws SQLException {
 		
 		String sqlDeleteProductStatement = "DELETE FROM Customer WHERE id = ?";
 		PreparedStatement preparedDeleteProductStatement = connectionDB.prepareStatement(sqlDeleteProductStatement);
@@ -111,7 +111,7 @@ public class CustomerDaoImplementation implements CustomerDao{
 
 	@Override
 	public void setSalesOrderRelatedToThisCustomer(Customer customer) throws SQLException {
-		customer.setSaleOrders(DaoFactory.getSaleOrderDao().findByCustomer(customer));
+		customer.setSaleOrders(DaoFactory.getSaleOrderDao().findSaleOrdersByCustomer(customer));
 		
 	}
 

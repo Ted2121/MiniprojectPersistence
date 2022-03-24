@@ -1,4 +1,4 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data_access.interfaces.ClothingDao;
+import data_access_layer.data_access_interfaces.ClothingDao;
 import model.Clothing;
 
 public class ClothingDaoImplementation implements ClothingDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
 	ProductDaoImplementation productDao = DaoFactory.getProductDao();
 	
-	private List<Clothing> buildObjects(ResultSet rs) throws SQLException{
-		List<Clothing> clothingList = new ArrayList<Clothing>();
+	private ArrayList<Clothing> buildObjects(ResultSet rs) throws SQLException{
+		ArrayList<Clothing> clothingList = new ArrayList<Clothing>();
 		while(rs.next()) {
 			clothingList.add(buildObject(rs));
 		}
@@ -32,7 +32,7 @@ public class ClothingDaoImplementation implements ClothingDao{
 	}
 
 	@Override
-	public Clothing findById(int id) throws SQLException {
+	public Clothing findClothingById(int id) throws SQLException {
 		String query = "SELECT * FROM Clothing INNER JOIN Product ON Clothing.id = Product.id WHERE Clothing.id = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, id);
@@ -46,19 +46,19 @@ public class ClothingDaoImplementation implements ClothingDao{
 	}
 
 	@Override
-	public List<Clothing> findAll() throws SQLException {
+	public ArrayList<Clothing> findAllClothings() throws SQLException {
 		String query = "SELECT * FROM Clothing INNER JOIN Product ON Clothing.id = Product.id";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<Clothing> retrievedClothingList = buildObjects(rs);
+		ArrayList<Clothing> retrievedClothingList = buildObjects(rs);
 
 		return retrievedClothingList;
 	}
 
 	@Override
-	public int create(Clothing objectToInsert) throws SQLException {
+	public int createClothing(Clothing objectToInsert) throws SQLException {
 		
-		int generatedId = productDao.create(objectToInsert);
+		int generatedId = productDao.createProduct(objectToInsert);
 		
 		String sqlInsertClothingStatement = "INSERT INTO Clothing(size, color, id)"
 				+ "VALUES(?, ?, ?);";
@@ -75,8 +75,8 @@ public class ClothingDaoImplementation implements ClothingDao{
 	}
 
 	@Override
-	public boolean update(Clothing objectToUpdate) throws SQLException {
-		productDao.update(objectToUpdate);
+	public boolean updateClothing(Clothing objectToUpdate) throws SQLException {
+		productDao.updateProduct(objectToUpdate);
 		
 		String sqlUpdateClothingStatement = "UPDATE Clothing SET [size] = ?, color = ? WHERE id = ?";
 		PreparedStatement preparedUpdateClothingStatement = connectionDB.prepareStatement(sqlUpdateClothingStatement);
@@ -89,8 +89,8 @@ public class ClothingDaoImplementation implements ClothingDao{
 	}
 
 	@Override
-	public boolean delete(Clothing objectToDelete) throws SQLException {
-		productDao.delete(objectToDelete);
+	public boolean deleteClothing(Clothing objectToDelete) throws SQLException {
+		productDao.deleteProduct(objectToDelete);
 
 		String sqlDeleteClothingStatement = "DELETE FROM Product WHERE id = ?";
 		PreparedStatement preparedDeleteClothingStatement = connectionDB.prepareStatement(sqlDeleteClothingStatement);

@@ -1,4 +1,4 @@
-package data_access.interfaces;
+package data_access_layer.data_access_interfaces;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.List;
 import model.Clothing;
 
 public interface ClothingDao {
-	Clothing findById(int id) throws SQLException;
-	List<Clothing> findAll() throws SQLException;
-	int create(Clothing objectToInsert) throws SQLException;
-	boolean update(Clothing objectToUpdate) throws SQLException;
-	boolean delete(Clothing objectToDelete) throws SQLException;
+	Clothing findClothingById(int id) throws SQLException;
+	List<Clothing> findAllClothings() throws SQLException;
+	int createClothing(Clothing objectToInsert) throws SQLException;
+	boolean updateClothing(Clothing objectToUpdate) throws SQLException;
+	boolean deleteClothing(Clothing objectToDelete) throws SQLException;
 	void setSupplierRelatedToThisClothing(Clothing clothing) throws SQLException;
 	void setLineItemRelatedToThisClothing(Clothing clothing) throws SQLException;
 }

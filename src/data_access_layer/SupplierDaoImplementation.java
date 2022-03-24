@@ -1,4 +1,4 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import data_access.interfaces.SupplierDao;
+import data_access_layer.data_access_interfaces.SupplierDao;
 import model.Supplier;
 
 public class SupplierDaoImplementation implements SupplierDao{
@@ -16,8 +16,8 @@ public class SupplierDaoImplementation implements SupplierDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
 	ProductDaoImplementation productDao = DaoFactory.getProductDao();
 	
-	private List<Supplier> buildObjects(ResultSet rs) throws SQLException{
-		List<Supplier> supplierList = new ArrayList<Supplier>();
+	private ArrayList<Supplier> buildObjects(ResultSet rs) throws SQLException{
+		ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
 		while(rs.next()) {
 			supplierList.add(buildObject(rs));
 		}
@@ -32,7 +32,7 @@ public class SupplierDaoImplementation implements SupplierDao{
 	}
 
 	@Override
-	public Supplier findById(int id) throws SQLException{
+	public Supplier findSupplierById(int id) throws SQLException{
 		String query = "SELECT * FROM Supplier WHERE id = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, id);
@@ -46,17 +46,17 @@ public class SupplierDaoImplementation implements SupplierDao{
 	}
 
 	@Override
-	public List<Supplier> findAll()  throws SQLException{
+	public ArrayList<Supplier> findAllSuppliers()  throws SQLException{
 		String query = "SELECT * FROM Supplier";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<Supplier> retrievedSupplierList = buildObjects(rs);
+		ArrayList<Supplier> retrievedSupplierList = buildObjects(rs);
 
 		return retrievedSupplierList;
 	}
 
 	@Override
-	public int create(Supplier objectToInsert)  throws SQLException{
+	public int createSupplier(Supplier objectToInsert)  throws SQLException{
 		
 		String sqlInsertSupplierStatement = "INSERT INTO Supplier([name], [address], country, phoneno, email)"
 				+ "VALUES(?, ?, ?, ?, ?);";
@@ -81,7 +81,7 @@ public class SupplierDaoImplementation implements SupplierDao{
 	}
 
 	@Override
-	public boolean update(Supplier objectToUpdate)  throws SQLException{
+	public boolean updateSupplier(Supplier objectToUpdate)  throws SQLException{
 		
 		String sqlUpdateSupplierStatement = "UPDATE Supplier SET [name] = ?, [address] = ?, country = ?, phoneno = ?, email = ? WHERE id = ?";
 		PreparedStatement preparedUpdateSupplierStatement = connectionDB.prepareStatement(sqlUpdateSupplierStatement);
@@ -98,7 +98,7 @@ public class SupplierDaoImplementation implements SupplierDao{
 	}
 
 	@Override
-	public boolean delete(Supplier objectToDelete)  throws SQLException{
+	public boolean deleteSupplier(Supplier objectToDelete)  throws SQLException{
 
 		String sqlDeleteSupplierStatement = "DELETE FROM Supplier WHERE id = ?";
 		PreparedStatement preparedDeleteSupplierStatement = connectionDB.prepareStatement(sqlDeleteSupplierStatement);

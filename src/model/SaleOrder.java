@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleOrder {
@@ -12,7 +13,7 @@ public class SaleOrder {
 	private Customer customer;
 	private Invoice invoice;
 	private double amount;
-	private List<LineItem> lineItem;
+	private ArrayList<LineItem> lineItem;
 	private String FK_Invoice;
 	private int FK_Customer;
 	
@@ -59,7 +60,7 @@ public class SaleOrder {
 
 
 	public SaleOrder(int id, String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer,
-			Invoice invoice, List<LineItem> lineItem) {
+			Invoice invoice, ArrayList<LineItem> lineItem) {
 		
 		this.id = id;
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
@@ -71,7 +72,7 @@ public class SaleOrder {
 	}
 
 
-	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice, List<LineItem> lineItem) {
+	public SaleOrder(String orderDate, String deliveryDate, boolean deliveryStatus, Customer customer, Invoice invoice, ArrayList<LineItem> lineItem) {
 		
 		this.orderDate = LocalDateTime.now().format(HelperModelClass.getFormat());
 		this.deliveryDate = LocalDateTime.now().plusDays(14).format(HelperModelClass.getFormat());
@@ -93,11 +94,11 @@ public class SaleOrder {
 	}
 
 
-	public List<LineItem> getLineItem() {
+	public ArrayList<LineItem> getLineItem() {
 		return lineItem;
 	}
 
-	public void setLineItem(List<LineItem> lineItem) {
+	public void setLineItem(ArrayList<LineItem> lineItem) {
 		this.lineItem = lineItem;
 	}
 

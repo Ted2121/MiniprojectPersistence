@@ -1,4 +1,4 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -6,29 +6,29 @@ import java.sql.DriverManager;
 
 
 public class DatabaseConnection {   
-	//Constants used to get access to the database
+	
 	
 	private static final String  driver = "jdbc:sqlserver://hildur.ucn.dk:1433";;
     private static final String  databaseName = ";databaseName=CSC-CSD-S212_10435523";
     
     private static String userName = ";user=CSC-CSD-S212_10435523";
     private static String password = ";password=Password1!";
-    private static String encryption = ";encrypt=false;";   //adding the encrypt to connect to database
+    private static String encryption = ";encrypt=false;";   
    
     private DatabaseMetaData dma;
     private static Connection con;
     
-    // an instance of the class is generated
+    
     private static DatabaseConnection  instance = null;
 
-    // the constructor is private to ensure that only one object of this class is created
+    
     private DatabaseConnection()
     {
     	
-    	String url = driver + databaseName + userName + password + encryption; //adding the encrypt to connect to database in the url
+    	String url = driver + databaseName + userName + password + encryption; 
 
         try{
-            //load of driver
+           
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             System.out.println("Driver class loaded ok");
           
@@ -38,22 +38,22 @@ public class DatabaseConnection {
             System.out.println(e.getMessage());
         }
         try{
-            //connection to the database
+            
             con = DriverManager.getConnection(url);
             con.setAutoCommit(true);
-            dma = con.getMetaData(); // get meta data
+            dma = con.getMetaData(); 
             System.out.println("Connection to " + dma.getURL());
             System.out.println("Driver " + dma.getDriverName());
             System.out.println("Database product name " + dma.getDatabaseProductName());
-        }//end try
+        }
         catch(Exception e){
             System.out.println("Problems with the connection to the database:");
             System.out.println(e.getMessage());
             System.out.println(url);
-        }//end catch
-    }//end  constructor
+        }
+    }
 	   
-  //closeDb: closes the connection to the database
+ 
     public static void closeConnection()
     {
        	try{
@@ -64,19 +64,19 @@ public class DatabaseConnection {
          catch (Exception e){
             System.out.println("Error trying to close the database " +  e.getMessage());
          }
-    }//end closeDB
+    }
 		
-    //getDBcon: returns the singleton instance of the DB connection
+    
     public Connection getDBcon()
     {
        return con;
     }
-    //getDBcon: returns the singleton instance of the DB connection
+    
     public static boolean instanceIsNull()
     {
        return (instance == null);
     }    
-    //this method is used to get the instance of the connection
+    
     public static DatabaseConnection getInstance()
     {
         if (instance == null)

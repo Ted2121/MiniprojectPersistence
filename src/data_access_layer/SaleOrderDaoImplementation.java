@@ -1,4 +1,4 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import data_access.interfaces.SaleOrderDao;
+import data_access_layer.data_access_interfaces.SaleOrderDao;
 import model.Customer;
 import model.Invoice;
 import model.SaleOrder;
@@ -19,8 +19,8 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
 	ProductDaoImplementation productDao = DaoFactory.getProductDao();
 	
-	private List<SaleOrder> buildObjects(ResultSet rs) throws SQLException{
-		List<SaleOrder> SaleOrderList = new ArrayList<SaleOrder>();
+	private ArrayList<SaleOrder> buildObjects(ResultSet rs) throws SQLException{
+		ArrayList<SaleOrder> SaleOrderList = new ArrayList<SaleOrder>();
 		while(rs.next()) {
 			SaleOrderList.add(buildObject(rs));
 		}
@@ -37,7 +37,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	}
 
 	@Override
-	public SaleOrder findById(int id)  throws SQLException{
+	public SaleOrder findSaleOrderById(int id)  throws SQLException{
 		String query = "SELECT * FROM SaleOrder WHERE id = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, id);
@@ -51,17 +51,17 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	}
 
 	@Override
-	public List<SaleOrder> findAll()  throws SQLException{
+	public ArrayList<SaleOrder> findAllSaleOrders()  throws SQLException{
 		String query = "SELECT * FROM SaleOrder";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<SaleOrder> retrievedSaleOrderList = buildObjects(rs);
+		ArrayList<SaleOrder> retrievedSaleOrderList = buildObjects(rs);
 
 		return retrievedSaleOrderList;
 	}
 
 	@Override
-	public int create(SaleOrder objectToInsert)  throws SQLException{
+	public int createSaleOrder(SaleOrder objectToInsert)  throws SQLException{
 		
 		String sqlInsertSaleOrderStatement = "INSERT INTO SaleOrder([orderDate],amount,deliveryDate, deliveryStatus, FK_Invoice, FK_Customer)"
 				+ "VALUES(?, ?, ?, ?, ?, ?);";
@@ -97,7 +97,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	}
 
 	@Override
-	public boolean update(SaleOrder objectToUpdate)  throws SQLException{
+	public boolean updateSaleOrder(SaleOrder objectToUpdate)  throws SQLException{
 		
 		String sqlUpdateSaleOrderStatement = "UPDATE SaleOrder SET [orderDate] = ? ,amount = ? ,deliveryDate = ?, deliveryStatus = ?"
 				+ ", FK_Invoice = ?, FK_Customer = ? WHERE id = ?";
@@ -116,7 +116,7 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	}
 
 	@Override
-	public boolean delete(SaleOrder objectToDelete)  throws SQLException{
+	public boolean deleteSaleOrder(SaleOrder objectToDelete)  throws SQLException{
 
 		String sqlDeleteSaleOrderStatement = "DELETE FROM SaleOrder WHERE id = ?";
 		PreparedStatement preparedDeleteSaleOrderStatement = connectionDB.prepareStatement(sqlDeleteSaleOrderStatement);
@@ -127,19 +127,19 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 	}
 
 	@Override
-	public List<SaleOrder> findByCustomer(Customer customer) throws SQLException {
+	public ArrayList<SaleOrder> findSaleOrdersByCustomer(Customer customer) throws SQLException {
 		String query = "SELECT * FROM SaleOrder WHERE FK_Customer = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, customer.getId());
 		
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<SaleOrder> retrievedSaleOrderList = buildObjects(rs);
+		ArrayList<SaleOrder> retrievedSaleOrderList = buildObjects(rs);
 
 		return retrievedSaleOrderList;
 	}
 	
 	@Override
-	public SaleOrder findByInvoice(Invoice invoice) throws SQLException{
+	public SaleOrder findSaleOrderByInvoice(Invoice invoice) throws SQLException{
 		String query = "SELECT * FROM SaleOrder WHERE FK_Invoice = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setString(1, invoice.getInvoiceNo());
@@ -155,19 +155,19 @@ public class SaleOrderDaoImplementation implements SaleOrderDao{
 
 	@Override
 	public boolean setInvoiceRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
-		saleOrder.setInvoice(DaoFactory.getInvoiceDao().findByInvoiceNumber(saleOrder.getFK_Invoice()));
+		saleOrder.setInvoice(DaoFactory.getInvoiceDao().findInvoiceByInvoiceNumber(saleOrder.getFK_Invoice()));
 		return true;
 	}
 
 	@Override
 	public boolean setCustomerRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
-		saleOrder.setCustomer(DaoFactory.getCustomerDao().findById(saleOrder.getFK_Customer()));
+		saleOrder.setCustomer(DaoFactory.getCustomerDao().findCustomerById(saleOrder.getFK_Customer()));
 		return true;
 	}
 
 	@Override
 	public boolean setLineItemRelatedToThisSaleOrder(SaleOrder saleOrder) throws SQLException {
-		saleOrder.setLineItem(DaoFactory.getLineItemDao().findBySaleOrder(saleOrder));
+		saleOrder.setLineItem(DaoFactory.getLineItemDao().findLineItemsBySaleOrder(saleOrder));
 		return true;
 	}
 

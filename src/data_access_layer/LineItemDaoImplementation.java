@@ -1,4 +1,4 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data_access.interfaces.ClothingDao;
-import data_access.interfaces.ItemDao;
-import data_access.interfaces.SaleOrderDao;
-import data_access.interfaces.LineItemDao;
+import data_access_layer.data_access_interfaces.ClothingDao;
+import data_access_layer.data_access_interfaces.ItemDao;
+import data_access_layer.data_access_interfaces.LineItemDao;
+import data_access_layer.data_access_interfaces.SaleOrderDao;
 import model.Clothing;
 
 import model.*;
@@ -20,8 +20,8 @@ public class LineItemDaoImplementation implements LineItemDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
 	ProductDaoImplementation productDao = DaoFactory.getProductDao();
 	
-	private List<LineItem> buildObjects(ResultSet rs) throws SQLException{
-		List<LineItem> LineItemList = new ArrayList<LineItem>();
+	private ArrayList<LineItem> buildObjects(ResultSet rs) throws SQLException{
+		ArrayList<LineItem> LineItemList = new ArrayList<LineItem>();
 		while(rs.next()) {
 			LineItemList.add(buildObject(rs));
 		}
@@ -34,9 +34,9 @@ public class LineItemDaoImplementation implements LineItemDao{
 		ClothingDao clothingDao = DaoFactory.getClothingDao();
 		SaleOrderDao saleOrderDao = DaoFactory.getSaleOrderDao();
 		
-		Item item = itemDao.findById(rs.getInt("PK_FK_Product"));
-		Clothing clothing = clothingDao.findById(rs.getInt("PK_FK_Product"));
-		SaleOrder saleOrder = saleOrderDao.findById(rs.getInt("PK_FK_SaleOrder"));
+		Item item = itemDao.findItemById(rs.getInt("PK_FK_Product"));
+		Clothing clothing = clothingDao.findClothingById(rs.getInt("PK_FK_Product"));
+		SaleOrder saleOrder = saleOrderDao.findSaleOrderById(rs.getInt("PK_FK_SaleOrder"));
 		LineItem buildedObject= null;
 		if(item != null) {
 			buildedObject = new LineItem(item, saleOrder, rs.getInt("quantity"));
@@ -48,31 +48,31 @@ public class LineItemDaoImplementation implements LineItemDao{
 
 
 	@Override
-	public List<LineItem> findBySaleOrder(SaleOrder saleOrder)  throws SQLException{
+	public ArrayList<LineItem> findLineItemsBySaleOrder(SaleOrder saleOrder)  throws SQLException{
 		String query = "SELECT * FROM LineItem WHERE PK_FK_SaleOrder = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, saleOrder.getId());
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<LineItem> retrievedLineItem = null;
+		ArrayList<LineItem> retrievedLineItem = null;
 		retrievedLineItem = buildObjects(rs);
 		
 		return retrievedLineItem;
 	}
 
 	@Override
-	public List<LineItem> findByProduct(Product product) throws SQLException {
+	public ArrayList<LineItem> findLineItemsByProduct(Product product) throws SQLException {
 		String query = "SELECT * FROM LineItem WHERE PK_FK_Product = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, product.getId());
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<LineItem> retrievedLineItem = null;
+		ArrayList<LineItem> retrievedLineItem = null;
 		retrievedLineItem = buildObjects(rs);
 		
 		return retrievedLineItem;
 	}
 	
 	@Override
-	public LineItem findById(int idSaleOrder, int idProduct) throws SQLException {
+	public LineItem findLineItemById(int idSaleOrder, int idProduct) throws SQLException {
 		String query = "SELECT * FROM LineItem WHERE PK_FK_SaleOrder = ? AND PK_FK_Product = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, idSaleOrder);
@@ -87,17 +87,17 @@ public class LineItemDaoImplementation implements LineItemDao{
 	}
 
 	@Override
-	public List<LineItem> findAll()  throws SQLException{
+	public ArrayList<LineItem> findAllLineItems()  throws SQLException{
 		String query = "SELECT * FROM LineItem";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<LineItem> retrievedLineItemList = buildObjects(rs);
+		ArrayList<LineItem> retrievedLineItemList = buildObjects(rs);
 
 		return retrievedLineItemList;
 	}
 
 	@Override
-	public boolean create(LineItem objectToInsert)  throws SQLException{
+	public boolean createLineItem(LineItem objectToInsert)  throws SQLException{
 		
 		String sqlInsertLineItemStatement = "INSERT INTO LineItem(PK_FK_Product, PK_FK_SaleOrder, quantity) "
 				+ "VALUES (?,?,?)";
@@ -110,7 +110,7 @@ public class LineItemDaoImplementation implements LineItemDao{
 	}
 
 	@Override
-	public boolean update(LineItem objectToUpdate)  throws SQLException{
+	public boolean updateLineItem(LineItem objectToUpdate)  throws SQLException{
 		
 		String sqlUpdateLineItemStatement = "UPDATE LineItem SET quantity = ?"
 				+ " WHERE PK_FK_Product = ? AND PK_FK_SaleOrder = ?";
@@ -125,7 +125,7 @@ public class LineItemDaoImplementation implements LineItemDao{
 	}
 
 	@Override
-	public boolean delete(LineItem objectToDelete)  throws SQLException{
+	public boolean deleteLineItem(LineItem objectToDelete)  throws SQLException{
 
 		String sqlDeleteLineItemStatement = "DELETE FROM LineItem WHERE PK_FK_Product = ? AND PK_FK_SaleOrder = ?";
 		PreparedStatement preparedDeleteLineItemStatement = connectionDB.prepareStatement(sqlDeleteLineItemStatement);

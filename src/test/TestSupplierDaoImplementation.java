@@ -13,9 +13,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import data_access.SupplierDaoImplementation;
-import data_access.DaoFactory;
-import data_access.DatabaseConnection;
+import data_access_layer.DaoFactory;
+import data_access_layer.DatabaseConnection;
+import data_access_layer.SupplierDaoImplementation;
 import model.Customer;
 import model.Invoice;
 import model.Supplier;
@@ -33,48 +33,48 @@ public class TestSupplierDaoImplementation {
 	public static void CreatingTheTuppleToDelete () throws SQLException {
 		objectToDelete = new Supplier("Mark", "place", "country", "phone number", "email@email.dk"); 
 		objectToUpdate = new Supplier("Mark", "place", "country", "phone number", "email@email.dk"); 
-		supplierDao.create(objectToDelete);
-		supplierDao.create(objectToUpdate);
+		supplierDao.createSupplier(objectToDelete);
+		supplierDao.createSupplier(objectToUpdate);
 	}
 	
 	
 	@Test
 	public void TestSupplierFindById() throws SQLException {
-		Supplier result = supplierDao.findById(3);
+		Supplier result = supplierDao.findSupplierById(3);
 		assertNotNull("The retrieved object shouldn't be null", result);
 	}
 	
 	@Test
 	public void TestSupplierFindAll() throws SQLException {
-		List<Supplier> result = supplierDao.findAll();
-		assertFalse("The retrieved list shouldn't be empty", result.isEmpty());
+		List<Supplier> result = supplierDao.findAllSuppliers();
+		assertFalse("The retrievedArrayList shouldn't be empty", result.isEmpty());
 	}
 	
 	@Test
 	public void TestSupplierInsert() throws SQLException {
 		Supplier testSupplier = new Supplier("Mark", "place", "country", "phone number", "email@email.dk"); 
-		generatedIdCreateTest = supplierDao.create(testSupplier);
-		assertNotNull("The retrieved object shouldn't be null", supplierDao.findById(generatedIdCreateTest));
+		generatedIdCreateTest = supplierDao.createSupplier(testSupplier);
+		assertNotNull("The retrieved object shouldn't be null", supplierDao.findSupplierById(generatedIdCreateTest));
 	}
 	
 	@Test
 	public void TestSupplierDelete() throws SQLException {
-		boolean isSucceeded = supplierDao.delete(objectToDelete);
+		boolean isSucceeded = supplierDao.deleteSupplier(objectToDelete);
 		assertTrue("Should have deletes the object ", isSucceeded);
 	}
 	
 	@Test
 	public void TestSupplierUpdate() throws SQLException {
 		objectToUpdate.setName("UpdatedName");
-		supplierDao.update(objectToUpdate);
+		supplierDao.updateSupplier(objectToUpdate);
 		
-		assertEquals("Should display UpdatedName", "UpdatedName", supplierDao.findById(objectToUpdate.getId()).getName());
+		assertEquals("Should display UpdatedName", "UpdatedName", supplierDao.findSupplierById(objectToUpdate.getId()).getName());
 	}
 	
 	@AfterClass
 	public static void CleanUp() throws SQLException {
-		Supplier objectToBeCleanUp = supplierDao.findById(generatedIdCreateTest);
-		supplierDao.delete(objectToBeCleanUp);
-		supplierDao.delete(objectToUpdate);
+		Supplier objectToBeCleanUp = supplierDao.findSupplierById(generatedIdCreateTest);
+		supplierDao.deleteSupplier(objectToBeCleanUp);
+		supplierDao.deleteSupplier(objectToUpdate);
 	}
 }

@@ -1,4 +1,4 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data_access.interfaces.ItemDao;
+import data_access_layer.data_access_interfaces.ItemDao;
 import model.Item;
 
 public class ItemDaoImplementation implements ItemDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
 	ProductDaoImplementation productDao = DaoFactory.getProductDao();
 	
-	private List<Item> buildObjects(ResultSet rs) throws SQLException{
-		List<Item> itemList = new ArrayList<Item>();
+	private ArrayList<Item> buildObjects(ResultSet rs) throws SQLException{
+		ArrayList<Item> itemList = new ArrayList<Item>();
 		while(rs.next()) {
 			itemList.add(buildObject(rs));
 		}
@@ -31,7 +31,7 @@ public class ItemDaoImplementation implements ItemDao{
 	}
 
 	@Override
-	public Item findById(int id)  throws SQLException{
+	public Item findItemById(int id)  throws SQLException{
 		String query = "SELECT * FROM Item INNER JOIN Product ON Item.id = Product.id WHERE Item.id = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setLong(1, id);
@@ -45,22 +45,22 @@ public class ItemDaoImplementation implements ItemDao{
 	}
 
 	@Override
-	public List<Item> findAll()  throws SQLException{
+	public ArrayList<Item> findAllItems()  throws SQLException{
 		String query = "SELECT * FROM Item INNER JOIN Product ON Item.id = Product.id";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<Item> retrievedItemList = buildObjects(rs);
+		ArrayList<Item> retrievedItemList = buildObjects(rs);
 
 		return retrievedItemList;
 	}
 
 	@Override
-	public List<Item> findByType(String type)  throws SQLException{
+	public ArrayList<Item> findItemsByType(String type)  throws SQLException{
 		String query = "SELECT * FROM Item INNER JOIN Product ON Item.id = Product.id WHERE Item.type = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setString(1, type);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<Item> itemList = new ArrayList<Item>();
+		ArrayList<Item> itemList = new ArrayList<Item>();
 		while(rs.next()) {
 			itemList.add(buildObject(rs));
 		}
@@ -69,8 +69,8 @@ public class ItemDaoImplementation implements ItemDao{
 	}
 
 	@Override
-	public int create(Item objectToInsert)  throws SQLException{
-		int generatedId = productDao.create(objectToInsert);
+	public int createItem(Item objectToInsert)  throws SQLException{
+		int generatedId = productDao.createProduct(objectToInsert);
 		
 		String sqlInsertItemStatement = "INSERT INTO Item([type], description, id)"
 				+ "VALUES(?, ?, ?);";
@@ -87,8 +87,8 @@ public class ItemDaoImplementation implements ItemDao{
 	}
 
 	@Override
-	public boolean update(Item objectToUpdate)  throws SQLException{
-		productDao.update(objectToUpdate);
+	public boolean updateItem(Item objectToUpdate)  throws SQLException{
+		productDao.updateProduct(objectToUpdate);
 		
 		String sqlUpdateItemStatement = "UPDATE Item SET [type] = ?, description = ? WHERE id = ?";
 		PreparedStatement preparedUpdateItemStatement = connectionDB.prepareStatement(sqlUpdateItemStatement);
@@ -101,8 +101,8 @@ public class ItemDaoImplementation implements ItemDao{
 	}
 
 	@Override
-	public boolean delete(Item objectToDelete)  throws SQLException{
-		productDao.delete(objectToDelete);
+	public boolean deleteItem(Item objectToDelete)  throws SQLException{
+		productDao.deleteProduct(objectToDelete);
 
 		String sqlDeleteItemStatement = "DELETE FROM Item WHERE id = ?";
 		PreparedStatement preparedDeleteItemStatement = connectionDB.prepareStatement(sqlDeleteItemStatement);

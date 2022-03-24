@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Product {
@@ -10,7 +11,7 @@ public abstract class Product {
 	private double salePrice;
 	private String countryOfOrigin;
 	private int minStock;
-	private List<LineItem> lineItem;
+	private ArrayList<LineItem> lineItem;
 	private Supplier supplier;
 	private int FK_Supplier;
 	private int stock;
@@ -27,7 +28,7 @@ public abstract class Product {
 	}
 
 	public Product(String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			List<LineItem> lineItem, int FK_Supplier) {
+		ArrayList<LineItem> lineItem, int FK_Supplier) {
 		
 		this.FK_Supplier = FK_Supplier;
 		this.name = name;
@@ -51,7 +52,7 @@ public abstract class Product {
 	
 	
 	public Product(int id, String name, double purchasePrice, double salePrice, String countryOfOrigin, int minStock, int stock,
-			List<LineItem> lineItem, int FK_Supplier) {
+			ArrayList<LineItem> lineItem, int FK_Supplier) {
 		this.FK_Supplier = FK_Supplier;
 		this.id = id;
 		this.name = name;
@@ -65,11 +66,11 @@ public abstract class Product {
 	
 	
 	
-	public List<LineItem> getSaleOrderProductPair() {
+	public ArrayList<LineItem> getSaleOrderProductPair() {
 		return lineItem;
 	}
 
-	public void setLineItem(List<LineItem> lineItem) {
+	public void setLineItem(ArrayList<LineItem> lineItem) {
 		this.lineItem = lineItem;
 	}
 

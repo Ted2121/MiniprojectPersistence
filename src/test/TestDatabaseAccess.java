@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import data_access.DatabaseConnection;
+import data_access_layer.DatabaseConnection;
 
 
 public class TestDatabaseAccess {

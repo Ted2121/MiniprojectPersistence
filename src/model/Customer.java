@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
@@ -11,7 +12,7 @@ public class Customer {
 	private int zipcode;
 	private String phoneNo;
 	private String type;
-	private List<SaleOrder> saleOrders;
+	private ArrayList<SaleOrder> saleOrders;
 	
 	public Customer(String name, String address, String city, int zipcode, String phoneNo, String type) {
 		
@@ -94,11 +95,11 @@ public class Customer {
 		this.type = type;
 	}
 
-	public List<SaleOrder> getSaleOrders() {
+	public ArrayList<SaleOrder> getSaleOrders() {
 		return saleOrders;
 	}
 
-	public void setSaleOrders(List<SaleOrder> saleOrders) {
+	public void setSaleOrders(ArrayList<SaleOrder> saleOrders) {
 		this.saleOrders = saleOrders;
 	}
 

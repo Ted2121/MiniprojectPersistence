@@ -1,14 +1,15 @@
-package data_access.interfaces;
+package data_access_layer.data_access_interfaces;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Supplier;
 
 public interface SupplierDao {
-	Supplier findById(int id) throws SQLException;
-	List<Supplier> findAll() throws SQLException;
-	int create(Supplier objectToInsert) throws SQLException;
-	boolean update(Supplier objectToUpdate) throws SQLException;
-	boolean delete(Supplier objectToDelete) throws SQLException;
+	Supplier findSupplierById(int id) throws SQLException;
+	ArrayList<Supplier> findAllSuppliers() throws SQLException;
+	int createSupplier(Supplier objectToInsert) throws SQLException;
+	boolean updateSupplier(Supplier objectToUpdate) throws SQLException;
+	boolean deleteSupplier(Supplier objectToDelete) throws SQLException;
 }

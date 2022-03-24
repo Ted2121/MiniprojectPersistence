@@ -1,21 +1,20 @@
-package data_access;
+package data_access_layer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import data_access.interfaces.InvoiceDao;
+import data_access_layer.data_access_interfaces.InvoiceDao;
 import model.Invoice;
 
 public class InvoiceDaoImplementation implements InvoiceDao{
 	Connection connectionDB = DatabaseConnection.getInstance().getDBcon();
 	
-	private List<Invoice> buildObjects(ResultSet rs) throws SQLException{
-		List<Invoice> invoiceList = new ArrayList<Invoice>();
+	private ArrayList<Invoice> buildObjects(ResultSet rs) throws SQLException{
+		ArrayList<Invoice> invoiceList = new ArrayList<Invoice>();
 		while(rs.next()) {
 			invoiceList.add(buildObject(rs));
 		}
@@ -29,7 +28,7 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 	}
 
 	@Override
-	public Invoice findByInvoiceNumber(String invoiceNo) throws SQLException {
+	public Invoice findInvoiceByInvoiceNumber(String invoiceNo) throws SQLException {
 		String query = "SELECT * FROM Invoice WHERE [invoiceno] = ?";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		preparedSelectStatement.setString(1, invoiceNo);
@@ -43,17 +42,17 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 	}
 
 	@Override
-	public List<Invoice> findAll() throws SQLException {
+	public ArrayList<Invoice> findAllInvoices() throws SQLException {
 		String query = "SELECT * FROM Invoice";
 		PreparedStatement preparedSelectStatement = connectionDB.prepareStatement(query);
 		ResultSet rs = preparedSelectStatement.executeQuery();
-		List<Invoice> retrievedInvoiceList = buildObjects(rs);
+		ArrayList<Invoice> retrievedInvoiceList = buildObjects(rs);
 
 		return retrievedInvoiceList;
 	}
 
 	@Override
-	public void create(Invoice objectToInsert) throws SQLException {
+	public void createInvoice(Invoice objectToInsert) throws SQLException {
 		String sqlInsertInvoiceStatement = "INSERT INTO Invoice(invoiceno, paymentDate, amount) VALUES(?, ?, ?);";
 		PreparedStatement preparedInsertInvoiceStatementWithGeneratedKey = connectionDB.prepareStatement(sqlInsertInvoiceStatement);
 		preparedInsertInvoiceStatementWithGeneratedKey.setString(1, objectToInsert.getInvoiceNo());
@@ -65,7 +64,7 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 	}
 
 	@Override
-	public boolean update(Invoice objectToUpdate) throws SQLException {
+	public boolean updateInvoice(Invoice objectToUpdate) throws SQLException {
 		String sqlUpdateInvoiceStatement = "UPDATE Invoice SET paymentDate = ?, amount= ? WHERE invoiceno = ?";
 		PreparedStatement preparedUpdateInvoiceStatement = connectionDB.prepareStatement(sqlUpdateInvoiceStatement);
 		preparedUpdateInvoiceStatement.setString(1, objectToUpdate.getPaymentDate());
@@ -78,7 +77,7 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 	}
 
 	@Override
-	public boolean delete(Invoice objectToDelete) throws SQLException {
+	public boolean deleteInvoice(Invoice objectToDelete) throws SQLException {
 		String sqlDeleteInvoiceStatement = "DELETE FROM Invoice WHERE invoiceno = ?";
 		PreparedStatement preparedDeleteInvoiceStatement = connectionDB.prepareStatement(sqlDeleteInvoiceStatement);
 		preparedDeleteInvoiceStatement.setString(1, objectToDelete.getInvoiceNo());
@@ -89,7 +88,7 @@ public class InvoiceDaoImplementation implements InvoiceDao{
 
 	@Override
 	public void setSalesOrderRelatedToThisInvoice(Invoice invoice) throws SQLException {
-		invoice.setSaleOrder(DaoFactory.getSaleOrderDao().findByInvoice(invoice));
+		invoice.setSaleOrder(DaoFactory.getSaleOrderDao().findSaleOrderByInvoice(invoice));
 		
 	}
 
